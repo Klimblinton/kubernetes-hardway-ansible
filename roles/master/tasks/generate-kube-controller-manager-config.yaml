@@ -1,7 +1,7 @@
 - name: Generate config for kube-controller-manager from kubectl
   ansible.builtin.command:
     argv: 
-      - kubectl
+      - /usr/local/bin/kubectl
       - config 
       - set-cluster 
       - "{{ kube_name }}"
@@ -14,7 +14,7 @@
 - name: Generate cred for kube-controller-manager from kubectl
   ansible.builtin.command:
     argv: 
-      - kubectl
+      - /usr/local/bin/kubectl
       - config 
       - set-credentials
       - system:kube-controller-manager
@@ -27,7 +27,7 @@
 - name: Link user cred with kube-controller-manager from kubectl
   ansible.builtin.command:
     argv: 
-      - kubectl
+      - /usr/local/bin/kubectl
       - config 
       - set-context 
       - default 
@@ -39,7 +39,7 @@
 - name: Set linked context user cred with kube-controller-manager from kubectl
   ansible.builtin.command:
     argv: 
-      - kubectl 
+      - /usr/local/bin/kubectl 
       - config 
       - use-context 
       - default 

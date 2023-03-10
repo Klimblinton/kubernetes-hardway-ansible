@@ -1,7 +1,7 @@
 - name: Wait until controlplain is started
   ansible.builtin.command: 
     argv: 
-      - kubectl 
+      - /usr/local/bin/kubectl 
       - cluster-info
       - --kubeconfig 
       - "{{ kube_etc_base_path }}/admin.conf"

@@ -21,7 +21,7 @@
 - name: Apply kube-apiserver clusterrole
   ansible.builtin.command: 
     argv: 
-      - kubectl 
+      - /usr/local/bin/kubectl 
       - apply
       - --kubeconfig  
       - "{{ kube_etc_base_path }}/admin.conf"
@@ -31,7 +31,7 @@
 - name: Apply kube-apiserver-to-kubelet clusterrole
   ansible.builtin.command: 
     argv: 
-      - kubectl 
+      - /usr/local/bin/kubectl 
       - apply
       - --kubeconfig  
       - "{{ kube_etc_base_path }}/admin.conf"

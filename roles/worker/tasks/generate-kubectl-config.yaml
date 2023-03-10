@@ -1,7 +1,7 @@
 - name: Generate config for cluster from kubectl
   ansible.builtin.command:
     argv: 
-      - kubectl 
+      - /usr/local/bin/kubectl 
       - config 
       - set-cluster 
       - "{{ kube_name }}"
@@ -14,7 +14,7 @@
 - name: Generate cred for worker node from kubectl
   ansible.builtin.command:
     argv: 
-      - kubectl 
+      - /usr/local/bin/kubectl 
       - config 
       - set-credentials 
       - "system:node:{{ inventory_hostname }}"
@@ -27,7 +27,7 @@
 - name: Link user cred with node from kubectl
   ansible.builtin.command:
     argv: 
-      - kubectl 
+      - /usr/local/bin/kubectl 
       - config 
       - set-context 
       - default 
@@ -39,7 +39,7 @@
 - name: Set linked context user cred with node from kubectl
   ansible.builtin.command:
     argv: 
-      - kubectl 
+      - /usr/local/bin/kubectl 
       - config 
       - use-context 
       - default 
