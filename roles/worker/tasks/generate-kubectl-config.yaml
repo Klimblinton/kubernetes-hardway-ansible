@@ -1,0 +1,47 @@
+- name: Generate config for cluster from kubectl
+  ansible.builtin.command:
+    argv: 
+      - kubectl 
+      - config 
+      - set-cluster 
+      - "{{ kube_name }}"
+      - "--certificate-authority={{ kube_ssl_base_path }}/ca.crt"
+      - --embed-certs=true
+      - "--server=https://{{ kube_api_addr }}:6443"
+      - --kubeconfig=/var/lib/kubelet/kubelet.kubeconfig
+ 
+
+- name: Generate cred for worker node from kubectl
+  ansible.builtin.command:
+    argv: 
+      - kubectl 
+      - config 
+      - set-credentials 
+      - "system:node:{{ inventory_hostname }}"
+      - "--client-certificate=/var/lib/kubelet/pki/node-{{ inventory_hostname }}.crt"
+      - "--client-key=/var/lib/kubelet/pki/node-{{ inventory_hostname }}.key"
+      - --embed-certs=true
+      - --kubeconfig=/var/lib/kubelet/kubelet.kubeconfig
+    
+
+- name: Link user cred with node from kubectl
+  ansible.builtin.command:
+    argv: 
+      - kubectl 
+      - config 
+      - set-context 
+      - default 
+      - "--cluster={{ kube_name }}"
+      - "--user=system:node:{{ inventory_hostname }}"
+      - --kubeconfig=/var/lib/kubelet/kubelet.kubeconfig
+  
+
+- name: Set linked context user cred with node from kubectl
+  ansible.builtin.command:
+    argv: 
+      - kubectl 
+      - config 
+      - use-context 
+      - default 
+      - --kubeconfig=/var/lib/kubelet/kubelet.kubeconfig
+

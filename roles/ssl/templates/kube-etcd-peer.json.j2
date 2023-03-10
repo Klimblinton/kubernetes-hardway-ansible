@@ -1,0 +1,15 @@
+{
+  "CN": "kube-etcd-peer",
+  "hosts": {{ cfssl.kube_hosts | tojson }},
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [{
+    "C": "{{ cfssl.country }}",
+    "ST": "{{ cfssl.state }}",
+    "L": "{{ cfssl.city }}",
+    "O": "{{ cfssl.organization }}",
+    "OU": "{{ cfssl.organization_unit }}"
+  }]
+}

@@ -1,0 +1,27 @@
+- name: Template kube-controller-manager systemd file to master server
+  ansible.builtin.template:
+    src: kube-controller-manager.service.j2
+    dest: /etc/systemd/system/kube-controller-manager.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+   - Restart kube-controller-manager
+
+- name: Enable and start kube-controller-manager service
+  ansible.builtin.service:
+    name: kube-controller-manager
+    state: started
+    enabled: true 
+
+- name: Check kube-controller-manager status
+  ansible.builtin.command:
+    argv: 
+      - systemctl 
+      - status 
+      - kube-controller-manager
+  register: kube_controller_manager_check
+
+- name: Dump kube-controller-manager status
+  ansible.builtin.debug:
+    var: kube_controller_manager_check.stdout_lines

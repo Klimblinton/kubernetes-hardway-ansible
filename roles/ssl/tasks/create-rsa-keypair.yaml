@@ -1,0 +1,9 @@
+- name: Generate rsa private key sa.key
+  ansible.builtin.shell:
+    cmd: "openssl genrsa -out {{ playbook_dir }}/shared/files/ssl/sa.key 2048"
+    creates: "{{ playbook_dir }}/shared/files/ssl/sa.key"
+
+- name: Generate rsa public key sa.key
+  ansible.builtin.shell:
+    cmd: "openssl rsa -in {{ playbook_dir }}/shared/files/ssl/sa.key -outform PEM -pubout -out {{ playbook_dir }}/shared/files/ssl/sa.pub"
+    creates: "{{ playbook_dir }}/shared/files/ssl/sa.pub"

@@ -1,0 +1,47 @@
+- name: Generate config for kube-proxy from kubectl
+  ansible.builtin.command:
+    argv: 
+      - kubectl 
+      - config 
+      - set-cluster 
+      - "{{ kube_name }}"
+      - "--certificate-authority={{ kube_ssl_base_path }}/ca.crt"
+      - --embed-certs=true
+      - "--server=https://{{ kube_api_addr }}:6443"
+      - --kubeconfig=/var/lib/kubelet/kube-proxy.kubeconfig
+
+
+- name: Generate cred for kube-proxy from kubectl
+  ansible.builtin.command:
+    argv: 
+      - kubectl 
+      - config 
+      - set-credentials 
+      - system:kube-proxy 
+      - --client-certificate=/var/lib/kubelet/pki/kube-proxy.crt 
+      - --client-key=/var/lib/kubelet/pki/kube-proxy.key
+      - --embed-certs=true
+      - --kubeconfig=/var/lib/kubelet/kube-proxy.kubeconfig
+   
+
+- name: Link user cred with kube-proxy from kubectl
+  ansible.builtin.command:
+    argv: 
+      - kubectl 
+      - config 
+      - set-context 
+      - default 
+      - "--cluster={{ kube_name }}"
+      - --user=system:kube-proxy
+      - --kubeconfig=/var/lib/kubelet/kube-proxy.kubeconfig
+   
+
+- name: Set linked context user cred with kube-proxy from kubectl
+  ansible.builtin.command:
+    argv: 
+      - kubectl 
+      - config 
+      - use-context 
+      - default 
+      - --kubeconfig=/var/lib/kubelet/kube-proxy.kubeconfig
+ 

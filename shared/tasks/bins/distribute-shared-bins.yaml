@@ -1,0 +1,202 @@
+## runc
+- name: Distribute runc binary
+  ansible.builtin.copy:
+    src: "../../shared/files/binaries/runc-{{ runc_version }}"
+    dest: "/usr/local/bin/runc-{{ runc_version }}"
+    owner: root
+    group: root
+    mode: 0755
+  tags:
+  - distribute-shared-bins
+  - distribute-bins
+  - disribute-runc-bin
+
+- name: Link runc binary  
+  ansible.builtin.file:
+    src: "runc-{{ runc_version }}"
+    dest: "/usr/local/bin/runc"
+    mode: "0777"
+    owner: root
+    group: root
+    state: link
+  tags:
+  - distribute-shared-bins
+  - distribute-bins
+  - disribute-runc-bin
+
+## containerd
+- name: Distribute containerd binary
+  ansible.builtin.copy:
+    src: "../../shared/files/binaries/containerd-{{ containerd_version }}"
+    dest: "/usr/local/bin/containerd-{{ containerd_version }}"
+    owner: root
+    group: root
+    mode: 0755
+  tags:
+  - distribute-shared-bins
+  - distribute-bins
+  - disribute-container-bin
+  
+- name: Link containerd binary  
+  ansible.builtin.file:
+    src: "containerd-{{ containerd_version }}"
+    dest: "/usr/local/bin/containerd"
+    mode: "0777"
+    owner: root
+    group: root
+    state: link
+  tags:
+  - distribute-shared-bins
+  - distribute-bins
+  - disribute-container-bin
+
+- name: Distribute containerd-shim binary
+  ansible.builtin.copy:
+    src: "../../shared/files/binaries/containerd-shim-{{ containerd_version }}"
+    dest: "/usr/local/bin/containerd-shim-{{ containerd_version }}"
+    owner: root
+    group: root
+    mode: 0755
+  tags:
+  - distribute-shared-bins
+  - distribute-bins
+  - disribute-container-bin
+  
+- name: Link containerd-shim binary  
+  ansible.builtin.file:
+    src: "containerd-shim-{{ containerd_version }}"
+    dest: "/usr/local/bin/containerd-shim"
+    mode: "0777"
+    owner: root
+    group: root
+    state: link
+  tags:
+  - distribute-shared-bins
+  - distribute-bins
+  - disribute-container-bin
+
+- name: Distribute containerd-shim-runc-v1 binary
+  ansible.builtin.copy:
+    src: "../../shared/files/binaries/containerd-shim-runc-v1-{{ containerd_version }}"
+    dest: "/usr/local/bin/containerd-shim-runc-v1-{{ containerd_version }}"
+    owner: root
+    group: root
+    mode: 0755
+  tags:
+  - distribute-shared-bins
+  - distribute-bins
+  - disribute-container-bin
+  
+- name: Link containerd-shim-runc-v1 binary  
+  ansible.builtin.file:
+    src: "containerd-shim-runc-v1-{{ containerd_version }}"
+    dest: "/usr/local/bin/containerd-shim-runc-v1"
+    mode: "0777"
+    owner: root
+    group: root
+    state: link
+  tags:
+  - distribute-shared-bins
+  - distribute-bins
+  - disribute-container-bin
+
+- name: Distribute containerd-shim-runc-v2 binary
+  ansible.builtin.copy:
+    src: "../../shared/files/binaries/containerd-shim-runc-v2-{{ containerd_version }}"
+    dest: "/usr/local/bin/containerd-shim-runc-v2-{{ containerd_version }}"
+    owner: root
+    group: root
+    mode: 0755
+  tags:
+  - distribute-shared-bins
+  - distribute-bins
+  - disribute-container-bin
+  
+- name: Link containerd-shim-runc-v2 binary  
+  ansible.builtin.file:
+    src: "containerd-shim-runc-v2-{{ containerd_version }}"
+    dest: "/usr/local/bin/containerd-shim-runc-v2"
+    mode: "0777"
+    owner: root
+    group: root
+    state: link
+  tags:
+  - distribute-shared-bins
+  - distribute-bins
+  - disribute-container-bin
+
+- name: Distribute containerd-stress binary
+  ansible.builtin.copy:
+    src: "../../shared/files/binaries/containerd-stress-{{ containerd_version }}"
+    dest: "/usr/local/bin/containerd-stress-{{ containerd_version }}"
+    owner: root
+    group: root
+    mode: 0755
+  tags:
+  - distribute-shared-bins
+  - distribute-bins
+  - disribute-container-bin
+  
+- name: Link containerd-stress binary  
+  ansible.builtin.file:
+    src: "containerd-stress-{{ containerd_version }}"
+    dest: "/usr/local/bin/containerd-stress"
+    mode: "0777"
+    owner: root
+    group: root
+    state: link
+  tags:
+  - distribute-shared-bins
+  - distribute-bins
+  - disribute-container-bin
+
+- name: Distribute ctr binary
+  ansible.builtin.copy:
+    src: "../../shared/files/binaries/ctr-{{ containerd_version }}"
+    dest: "/usr/local/bin/ctr-{{ containerd_version }}"
+    owner: root
+    group: root
+    mode: 0755
+  tags:
+  - distribute-shared-bins
+  - distribute-bins
+  - disribute-container-bin
+  
+- name: Link ctrs binary  
+  ansible.builtin.file:
+    src: "ctr-{{ containerd_version }}"
+    dest: "/usr/local/bin/ctr"
+    mode: "0777"
+    owner: root
+    group: root
+    state: link
+  tags:
+  - distribute-shared-bins
+  - distribute-bins
+  - disribute-container-bin
+
+## crictl
+- name: Distribute crictl binary
+  ansible.builtin.copy:
+    src: "../../shared/files/binaries/crictl-{{ crictl_version }}"
+    dest: "/usr/local/bin/crictl-{{ crictl_version }}"
+    owner: root
+    group: root
+    mode: 0755
+  tags:
+  - distribute-shared-bins
+  - distribute-bins
+  - disribute-crictl-bin
+
+- name: Link crictl binary  
+  ansible.builtin.file:
+    src: "crictl-{{ crictl_version }}"
+    dest: "/usr/local/bin/crictl"
+    mode: "0777"
+    owner: root
+    group: root
+    state: link
+  tags:
+  - distribute-shared-bins
+  - distribute-bins
+  - disribute-crictl-bin

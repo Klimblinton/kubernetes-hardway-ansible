@@ -1,0 +1,6 @@
+# Ignore everything
+*
+
+!.gitignore
+# Keep sample group_vars all.yml.sample
+!all.yml.sample

@@ -1,0 +1,39 @@
+- name: Template etcd systemd file to etcd server
+  ansible.builtin.template:
+    src: etcd.service.j2
+    dest: /etc/systemd/system/etcd_{{ etcd_name }}.service
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Template etcd env file to etcd server
+  ansible.builtin.template:
+    src: etcd.env.j2
+    dest: /etc/etcd_{{ etcd_name }}.env
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Enable and start etcd service
+  ansible.builtin.service:
+    name: etcd_{{ etcd_name }}
+    state: started
+    enabled: true 
+
+- name: Check etcd status
+  ansible.builtin.command:
+    argv: 
+      - etcdctl
+      - member 
+      - list 
+      - --endpoints=https://127.0.0.1:{{ etcd_listen_client_port }}
+      - --cacert={{ etcd_ssl_base_path }}/ca.crt
+      - --cert={{ etcd_ssl_base_path }}/peer.crt
+      - --key={{ etcd_ssl_base_path }}/peer.key
+  environment:
+    ETCDCTL_API: 3
+  register: etcd_check
+
+- name: Dump etcd status
+  ansible.builtin.debug:
+    var: etcd_check.stdout_lines

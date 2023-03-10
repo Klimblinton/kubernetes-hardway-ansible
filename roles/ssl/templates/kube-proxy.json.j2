@@ -1,0 +1,14 @@
+{
+  "CN": "system:kube-proxy",
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [{
+    "C": "{{ cfssl.country }}",
+    "ST": "{{ cfssl.state }}",
+    "L": "{{ cfssl.city }}",
+    "O": "system:node-proxier",
+    "OU": "{{ cfssl.organization_unit }}"
+  }]
+}

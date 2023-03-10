@@ -1,0 +1,36 @@
+- name: "Distribute cfssl binaries"
+  ansible.builtin.copy:
+    src: "../../shared/files/binaries/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - "cfssl-{{ cfssl_version }}"
+    - "cfssljson-{{ cfssl_version }}"
+    - "cfssl-certinfo-{{ cfssl_version }}"
+  tags:
+    - distribute-ssl-bins
+    - disribute-bins
+
+- name: Link cfssl binaries
+  ansible.builtin.file:
+    src: "{{ item.src }}"
+    dest: "/usr/local/bin/{{ item.dst }}"
+    mode: "0777"
+    owner: root
+    group: root
+    state: link
+  with_items:
+    - src: "cfssl-{{ cfssl_version }}"
+      dst: cfssl
+    - src: "cfssljson-{{ cfssl_version }}"
+      dst: cfssljson
+    - src: "cfssl-certinfo-{{ cfssl_version }}"
+      dst: cfssl-certinfo
+  tags:
+    - distribute-ssl-bins
+    - disribute-bins
+
+
+  

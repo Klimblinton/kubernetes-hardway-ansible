@@ -1,0 +1,13 @@
+- name: Copy ca cert file 
+  ansible.builtin.copy:
+    src: "../../shared/files/ssl{{ kube_ssl_base_path }}/ca.crt"
+    dest: "{{ kube_ssl_base_path }}/ca.crt"
+  tags:
+  - distribute-certs
+
+- name: Copy ca key file 
+  ansible.builtin.copy:
+    src: "../../shared/files/ssl{{ kube_ssl_base_path }}/ca.key"
+    dest: "{{ kube_ssl_base_path }}/ca.key"
+  tags:
+  - distribute-certs

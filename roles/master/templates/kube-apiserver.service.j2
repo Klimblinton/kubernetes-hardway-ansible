@@ -1,0 +1,42 @@
+[Unit]
+Description=Kubernetes API Server
+Documentation=https://github.com/kubernetes/kubernetes
+
+[Service]
+ExecStart=/usr/local/bin/kube-apiserver \
+  --advertise-address={{ ansible_host }} \
+  --allow-privileged=true \
+  --apiserver-count=3 \
+  --audit-log-maxage=30 \
+  --audit-log-maxbackup=3 \
+  --audit-log-maxsize=100 \
+  --audit-log-path=/var/log/audit.log \
+  --authorization-mode=Node,RBAC \
+  --bind-address=0.0.0.0 \
+  --client-ca-file={{ kube_ssl_base_path }}/ca.crt \
+  --enable-admission-plugins=NamespaceLifecycle,NodeRestriction,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota \
+  --etcd-cafile={{ etcd_ssl_base_path }}/ca.crt \
+  --etcd-certfile={{ kube_ssl_base_path }}/apiserver-etcd-client.crt \
+  --etcd-keyfile={{ kube_ssl_base_path }}/apiserver-etcd-client.key \
+  --etcd-servers={{ etcd_apiserver_servers_addr }} \
+  --event-ttl=1h \
+  --encryption-provider-config={{ kube_etc_base_path }}/encryption-config.yaml \
+  --kubelet-certificate-authority={{ kube_ssl_base_path }}/ca.crt \
+  --kubelet-client-certificate={{ kube_ssl_base_path }}/apiserver-kubelet-client.crt \
+  --kubelet-client-key={{ kube_ssl_base_path }}/apiserver-kubelet-client.key \
+  --runtime-config='api/all=true' \
+  --service-account-key-file={{ kube_ssl_base_path }}/sa.pub \
+  --service-account-signing-key-file={{ kube_ssl_base_path }}/sa.key \
+  --service-account-issuer=https://{{ kube_api_addr }}:6443 \
+  --service-cluster-ip-range=10.32.0.0/24 \
+  --service-node-port-range=30000-32767 \
+  --tls-cert-file={{ kube_ssl_base_path }}/apiserver.crt \
+  --tls-private-key-file={{ kube_ssl_base_path }}/apiserver.key \
+  --proxy-client-cert-file={{ kube_ssl_base_path }}/front-proxy-client.crt \
+  --proxy-client-key-file={{ kube_ssl_base_path }}/front-proxy-client.key \
+  --v=2
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

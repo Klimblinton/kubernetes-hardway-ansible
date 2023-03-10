@@ -1,0 +1,33 @@
+- name: Copy ca cert file 
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/shared/files/ssl{{ kube_ssl_base_path }}/ca.crt"
+    dest: "{{ kube_ssl_base_path }}/ca.crt"
+  tags:
+    - distribute-certs
+
+- name: Copy node (kubelet) cert file  
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/shared/files/ssl{{ kube_ssl_base_path }}/node-{{ inventory_hostname }}.crt"
+    dest: "/var/lib/kubelet/pki/node-{{ inventory_hostname }}.crt"
+  tags:
+    - distribute-certs
+    - distribute-worker-certs
+
+- name: Copy node (kubelet) key file  
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/shared/files/ssl{{ kube_ssl_base_path }}/node-{{ inventory_hostname }}.key"
+    dest: "/var/lib/kubelet/pki/node-{{ inventory_hostname }}.key"
+  tags:
+    - distribute-certs
+    - distribute-worker-certs
+
+- name: Copy kube-proxy cert and keyfile  
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/shared/files/ssl{{ kube_ssl_base_path }}/{{ item }}"
+    dest: "/var/lib/kubelet/pki/{{ item }}"
+  with_items:
+    - kube-proxy.crt
+    - kube-proxy.key
+  tags:
+    - distribute-certs
+    - distribute-kube-proxy-certs

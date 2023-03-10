@@ -1,0 +1,11 @@
+- name: Distribute etcd, etcdctl, etcdutil binary files
+  import_tasks: distribute-etcd-bins.yaml
+
+- name: Make etcd config dirs
+  import_tasks: make-dirs.yaml
+
+- name: Distribute kubernetes pems to etcd dir
+  import_tasks: distribute-kubernetes-pems-etcd.yaml
+
+- name: Install and debug etcd service
+  import_tasks: install-etcd-service.yaml

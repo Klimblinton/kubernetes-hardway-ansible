@@ -1,0 +1,9 @@
+- name: Template kube-scheduler config to controller
+  ansible.builtin.template:
+    src: config/kube-scheduler.yaml.j2
+    dest: "{{ kube_etc_base_path }}/config/kube-scheduler.yaml"
+    owner: root
+    group: root
+    mode: 0640
+  notify:
+   - Restart kube-scheduler

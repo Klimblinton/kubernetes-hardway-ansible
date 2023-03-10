@@ -1,0 +1,26 @@
+- name: Create /etc/cni/net.d directory
+  ansible.builtin.file:
+    path: /etc/cni/net.d
+    owner: root
+    group: root
+    mode: '0750'
+    state: directory
+
+- name: Create /etc/containerd directory
+  ansible.builtin.file:
+    path: /etc/containerd
+    owner: root
+    group: root
+    mode: '0750'
+    state: directory
+
+- name: Create /var/lib/kubelet/pki directory
+  ansible.builtin.file:
+    path: /var/lib/kubelet/pki
+    owner: root
+    group: root
+    mode: '0750'
+    state: directory
+    recurse: yes
+
+

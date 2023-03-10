@@ -1,0 +1,10 @@
+- name: Template encryption config to controller
+  ansible.builtin.template:
+    src: encryption-config.yaml.j2
+    dest: "{{ kube_etc_base_path }}/encryption-config.yaml"
+    owner: root
+    group: root
+    mode: 0750
+  notify:
+   - Restart kube-apiserver
+   - Restart kube-scheduler

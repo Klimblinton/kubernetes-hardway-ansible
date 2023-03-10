@@ -1,0 +1,20 @@
+[Unit]
+Description=etcd
+Documentation=https://github.com/coreos
+After=network.target
+
+[Service]
+Type=notify
+User=root
+EnvironmentFile=/etc/etcd_{{ etcd_name }}.env
+ExecStart=/usr/local/bin/etcd
+NotifyAccess=all
+Restart=always
+RestartSec=10s
+LimitNOFILE=40000
+
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

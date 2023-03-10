@@ -1,0 +1,7 @@
+- name: Install packages socat, conntrack and ipset
+  ansible.builtin.package:
+    name:
+      - socat
+      - conntrack
+      - ipset
+    state: present

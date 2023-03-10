@@ -1,0 +1,51 @@
+- name: Template ca-csr json config
+  ansible.builtin.template:
+    src: ca-csr-{{ item }}.json.j2
+    dest: "{{ playbook_dir }}/shared/files/ssl/conf/ca-csr-{{ item }}.json"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - kubernetes
+    - etcd
+    - kubernetes-front-proxy
+
+- name: Copy ca-config.json
+  ansible.builtin.copy:
+    src: ca-config.json
+    dest: "{{ playbook_dir }}/shared/files/ssl/conf/ca-config.json"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Template json config
+  ansible.builtin.template:
+    src: "{{ item }}.json.j2"
+    dest: "{{ playbook_dir }}/shared/files/ssl/conf/{{ item }}.json"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - ca-csr-etcd
+    - ca-csr-kubernetes-front-proxy
+    - ca-csr-kubernetes
+    - kube-etcd
+    - kube-etcd-peer
+    - kube-etcd-healthcheck-client
+    - kube-apiserver-etcd-client
+    - kube-apiserver
+    - kube-apiserver-kubelet-client
+    - front-proxy-client
+    - kube-controller-manager
+    - kube-scheduler
+    - kubernetes-admin
+    - kube-proxy
+
+- name: Template worker node json config
+  ansible.builtin.template:
+    src: "kube-node.json.j2"
+    dest: "{{ playbook_dir }}/shared/files/ssl/conf/kube-node-{{ item }}.json"
+    owner: root
+    group: root
+    mode: 0644
+  with_items: "{{ groups['worker_hosts'] }}"

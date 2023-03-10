@@ -1,0 +1,47 @@
+- name: Generate config for admin from kubectl
+  ansible.builtin.command:
+    argv: 
+      - kubectl 
+      - config 
+      - set-cluster 
+      - "{{ kube_name }}"
+      - "--certificate-authority={{ kube_ssl_base_path}}/ca.crt"
+      - --embed-certs=true
+      - --server=https://127.0.0.1:6443
+      - "--kubeconfig={{ kube_etc_base_path }}/admin.conf"
+
+
+- name: Generate cred for admin from kubectl
+  ansible.builtin.command:
+    argv: 
+      - kubectl 
+      - config 
+      - set-credentials 
+      - kubernetes-admin
+      - --client-certificate={{ kube_ssl_base_path}}/kubernetes-admin.crt
+      - --client-key={{ kube_ssl_base_path}}/kubernetes-admin.key
+      - --embed-certs=true
+      - "--kubeconfig={{ kube_etc_base_path }}/admin.conf"
+
+
+- name: Link user cred with admin from kubectl
+  ansible.builtin.command:
+    argv: 
+      - kubectl 
+      - config 
+      - set-context 
+      - default 
+      - "--cluster={{ kube_name }}"
+      - --user=kubernetes-admin
+      - "--kubeconfig={{ kube_etc_base_path }}/admin.conf"
+
+
+- name: Set linked context user cred with admin from kubectl
+  ansible.builtin.command:
+    argv: 
+      - kubectl 
+      - config 
+      - use-context 
+      - default 
+      - "--kubeconfig={{ kube_etc_base_path }}/admin.conf"
+   

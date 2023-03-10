@@ -1,0 +1,143 @@
+- name: Copy pems
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/shared/files/ssl/{{ item.src }}"
+    dest: "{{ playbook_dir }}/shared/files/ssl/etc/kubernetes/pki/{{ item.dst }}"
+    owner: root
+    group: root
+    mode: 0640
+  with_items:
+    - src: ca-kubernetes.pem
+      dst: ca.crt
+    - src: ca-kubernetes-key.pem
+      dst: ca.key
+    - src: ca-etcd.pem
+      dst: etcd/ca.crt
+    - src: ca-etcd-key.pem
+      dst: etcd/ca.key
+    - src: ca-kubernetes-front-proxy.pem
+      dst: front-proxy-ca.crt
+    - src: ca-kubernetes-front-proxy-key.pem
+      dst: front-proxy-ca.key    
+    - src: kube-etcd.pem
+      dst: etcd/server.crt  
+    - src: kube-etcd-key.pem
+      dst: etcd/server.key
+    - src: kube-etcd-peer.pem
+      dst: etcd/peer.crt  
+    - src: kube-etcd-peer-key.pem
+      dst: etcd/peer.key   
+    - src: kube-etcd-healthcheck-client.pem
+      dst: etcd/healthcheck-client.crt  
+    - src: kube-etcd-healthcheck-client-key.pem
+      dst: etcd/healthcheck-client.key
+    - src: kube-apiserver-etcd-client.pem
+      dst: apiserver-etcd-client.crt  
+    - src: kube-apiserver-etcd-client-key.pem
+      dst: apiserver-etcd-client.key      
+    - src: kube-apiserver.pem
+      dst: apiserver.crt
+    - src: kube-apiserver-key.pem
+      dst: apiserver.key
+    - src: kube-apiserver-kubelet-client.pem
+      dst: apiserver-kubelet-client.crt
+    - src: kube-apiserver-kubelet-client-key.pem
+      dst: apiserver-kubelet-client.key
+    - src: front-proxy-client.pem
+      dst: front-proxy-client.crt
+    - src: front-proxy-client-key.pem
+      dst: front-proxy-client.key
+    - src: sa.key
+      dst: sa.key
+    - src: sa.pub
+      dst: sa.pub
+    - src: kube-controller-manager.pem
+      dst: kube-controller-manager.crt
+    - src: kube-controller-manager-key.pem
+      dst: kube-controller-manager.key
+    - src: kube-scheduler.pem
+      dst: kube-scheduler.crt
+    - src: kube-scheduler-key.pem
+      dst: kube-scheduler.key
+    - src: kubernetes-admin.pem
+      dst: kubernetes-admin.crt
+    - src: kubernetes-admin-key.pem
+      dst: kubernetes-admin.key
+    - src: kube-proxy.pem
+      dst: kube-proxy.crt
+    - src: kube-proxy-key.pem
+      dst: kube-proxy.key
+
+- name: Copy pems csr
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/shared/files/ssl/{{ item }}"
+    dest: "{{ playbook_dir }}/shared/files/ssl/csr/{{ item }}"
+    owner: root
+    group: root
+    mode: 0640
+  with_items:
+    - ca-kubernetes.csr
+    - ca-etcd.csr
+    - ca-kubernetes-front-proxy.csr
+    - kube-etcd.csr
+    - kube-etcd-peer.csr
+    - kube-etcd-healthcheck-client.csr
+    - kube-apiserver-etcd-client.csr
+    - kube-apiserver.csr
+    - kube-apiserver-kubelet-client.csr
+    - front-proxy-client.csr
+    - kube-controller-manager.csr
+    - kube-scheduler.csr
+    - kubernetes-admin.csr
+    - kube-proxy.csr
+
+- name: Delete old pems
+  ansible.builtin.file:
+    path: "{{ playbook_dir }}/shared/files/ssl/{{ item }}"
+    state: absent
+  with_items:
+    - ca-kubernetes.pem
+    - ca-kubernetes-key.pem
+    - ca-kubernetes.csr
+    - ca-etcd.pem
+    - ca-etcd-key.pem
+    - ca-etcd.csr
+    - ca-kubernetes-front-proxy.pem
+    - ca-kubernetes-front-proxy-key.pem
+    - ca-kubernetes-front-proxy.csr
+    - kube-etcd.pem
+    - kube-etcd-key.pem
+    - kube-etcd.csr
+    - kube-etcd-peer.pem
+    - kube-etcd-peer-key.pem
+    - kube-etcd-peer.csr
+    - kube-etcd-healthcheck-client.pem 
+    - kube-etcd-healthcheck-client-key.pem
+    - kube-etcd-healthcheck-client.csr
+    - kube-apiserver-etcd-client.pem
+    - kube-apiserver-etcd-client-key.pem
+    - kube-apiserver-etcd-client.csr
+    - kube-apiserver.pem
+    - kube-apiserver-key.pem
+    - kube-apiserver.csr
+    - kube-apiserver-kubelet-client.pem
+    - kube-apiserver-kubelet-client-key.pem
+    - kube-apiserver-kubelet-client.csr
+    - front-proxy-client.pem
+    - front-proxy-client-key.pem
+    - front-proxy-client.csr
+    - sa.key
+    - sa.pub
+    - kube-controller-manager.pem
+    - kube-controller-manager-key.pem
+    - kube-controller-manager.csr
+    - kube-scheduler.pem
+    - kube-schedule-key.pem
+    - kube-schedule.csr
+    - kubernetes-admin.pem
+    - kubernetes-admin-key.pem
+    - kubernetes-admin.csr
+    - kube-proxy.pem
+    - kube-proxy-key.pem
+    - kube-proxy.csr
+  when: ssl_cleanup_after_generation 
+

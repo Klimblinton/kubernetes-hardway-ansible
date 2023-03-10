@@ -1,0 +1,72 @@
+- name: Create /usr/local/bin/cni-(version) directory
+  ansible.builtin.file:
+    path: "/usr/local/bin/cni-plugins-{{ cni_version }}"
+    owner: root
+    group: root
+    mode: '0755'
+    state: directory
+  tags:
+    - distribute-worker-bins
+    - disribute-bins
+
+- name: Distribute cni-(version) binaries
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/shared/files/binaries/cni-plugins-{{ cni_version }}/{{ item }}"
+    dest: "/usr/local/bin/cni-plugins-{{ cni_version }}/{{ item }}"
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - bandwidth
+    - bridge
+    - dhcp
+    - dummy
+    - firewall
+    - host-device
+    - host-local
+    - ipvlan
+    - loopback
+    - macvlan
+    - portmap
+    - ptp
+    - sbr
+    - static
+    - tuning
+    - vlan
+    - vrf     
+  tags:
+    - distribute-cni-bins
+    - disribute-bins
+
+- name: Link cni-(version) binaries  
+  ansible.builtin.file:
+    src: "cni-plugins-{{ cni_version }}/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+    mode: "0777"
+    owner: root
+    group: root
+    state: link
+  with_items:
+    - bandwidth
+    - bridge
+    - dhcp
+    - dummy
+    - firewall
+    - host-device
+    - host-local
+    - ipvlan
+    - loopback
+    - macvlan
+    - portmap
+    - ptp
+    - sbr
+    - static
+    - tuning
+    - vlan
+    - vrf     
+  tags:
+    - distribute-cni-bins
+    - disribute-bins
+
+
+  

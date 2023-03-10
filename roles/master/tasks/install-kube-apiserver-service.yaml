@@ -1,0 +1,27 @@
+- name: Template kube-apiserver systemd file to master server
+  ansible.builtin.template:
+    src: kube-apiserver.service.j2
+    dest: /etc/systemd/system/kube-apiserver.service
+    owner: root
+    group: root
+    mode: "0755"
+  notify:
+   - Restart kube-apiserver
+
+- name: Enable and start kube-apiserver service
+  ansible.builtin.service:
+    name: kube-apiserver
+    state: started
+    enabled: true 
+
+- name: Check kube-apiserver status
+  ansible.builtin.command:
+    argv: 
+      - systemctl 
+      - status 
+      - kube-apiserver
+  register: kube_apiserver_check
+
+- name: Dump and debug kube-apiserver status
+  ansible.builtin.debug:
+    var: kube_apiserver_check.stdout_lines

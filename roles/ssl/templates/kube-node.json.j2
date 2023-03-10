@@ -1,0 +1,14 @@
+{
+  "CN": "system:node:{{ item }}",
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [{
+    "C": "{{ cfssl.country }}",
+    "ST": "{{ cfssl.state }}",
+    "L": "{{ cfssl.city }}",
+    "O": "system:nodes",
+    "OU": "{{ cfssl.organization_unit }}"
+  }]
+}

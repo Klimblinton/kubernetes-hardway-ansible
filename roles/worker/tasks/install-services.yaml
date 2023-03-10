@@ -1,0 +1,22 @@
+- name: Distribute systemd file for containerd, kube-proxy and kubelet services
+  ansible.builtin.copy:
+    src: "etc/systemd/system/{{ item }}.service"
+    dest: "/etc/systemd/system/{{ item }}.service"
+    owner: root
+    group: root
+    mode: "0755"
+  with_items:
+    - containerd
+    - kube-proxy
+    - kubelet
+
+
+- name: Enable and start containerd, kube-proxy and kubelet service
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: started
+    enabled: true 
+  with_items:
+    - containerd
+    - kube-proxy
+    - kubelet

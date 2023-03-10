@@ -1,0 +1,33 @@
+- name: Create kubernetes etc directory
+  ansible.builtin.file:
+    state: directory
+    path: "{{ kube_etc_base_path }}"
+    mode: 0755
+    owner: root
+    group: root
+  tags:
+  - create-etc-dir
+  - create-kube-dirs
+
+- name: Create kubernetes etc ssl directory
+  ansible.builtin.file:
+    state: directory
+    path: "{{ kube_ssl_base_path }}"
+    mode: 0755
+    owner: root
+    group: root
+  tags:
+  - create-ssl-dir
+  - create-kube-dirs
+
+- name: Create pki symlink to kubernetes ssl directory
+  ansible.builtin.file:
+    src: "{{ kube_ssl_base_path }}"
+    dest: "{{ kube_etc_base_path }}/ssl"
+    mode: 0777
+    owner: root
+    group: root
+    state: link
+  tags:
+  - create-ssl-dir
+  - create-kube-dirs

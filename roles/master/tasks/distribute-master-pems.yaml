@@ -1,0 +1,27 @@
+- name: Copy kubernetes cert file 
+  ansible.builtin.copy:
+    src: "../../shared/files/ssl{{ kube_ssl_base_path }}/{{ item }}"
+    dest: "{{ kube_ssl_base_path }}/{{ item }}"
+  with_items:
+    - apiserver.crt
+    - apiserver.key
+    - apiserver-kubelet-client.crt
+    - apiserver-kubelet-client.key
+    - front-proxy-ca.crt
+    - front-proxy-ca.key
+    - front-proxy-client.crt
+    - front-proxy-client.key
+    - kube-controller-manager.crt
+    - kube-controller-manager.key
+    - kube-scheduler.crt
+    - kube-scheduler.key
+    - kubernetes-admin.crt
+    - kubernetes-admin.key
+    - apiserver-etcd-client.crt
+    - apiserver-etcd-client.key
+  notify:
+   - Restart kube-apiserver
+  tags:
+    - distribute-certs
+    - distribute-apiserver-cert
+    

@@ -1,0 +1,37 @@
+- name: Install prerequisites packages
+  import_tasks: install-prerequisites.yaml
+
+- name: Disable swap
+  import_tasks: disable-swap.yaml
+
+- name: Create dirs for config files
+  import_tasks: create-dirs.yaml
+
+- name: Copy ca.crt, node cert and key file 
+  import_tasks: distribute-node-certs.yaml
+
+- name: Distribute worker binary files
+  import_tasks: distribute-bins/distribute-worker-bins.yaml
+
+- name: Distribute cni binary files
+  import_tasks: distribute-bins/distribute-cni-bins.yaml
+
+- name: Distribute shared binary files 
+  import_tasks: "../../shared/tasks/bins/distribute-shared-bins.yaml"
+
+- name: Generate kubectl worker config
+  import_tasks: generate-kubectl-config.yaml
+
+- name: Generate kube-proxy config
+  import_tasks: generate-kubeproxy-config.yaml
+
+- name: Distribute network configs
+  import_tasks: distribute-network-configs.yaml
+
+- name: Distribute service configs
+  import_tasks: distribute-configs.yaml
+
+- name: Distribute systemd configs and install containerd, kube-proxy and kubelet services
+  import_tasks: install-services.yaml
+
+

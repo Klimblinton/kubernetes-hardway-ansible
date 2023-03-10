@@ -1,0 +1,8 @@
+- name: Create /etc/kubernetes/config directory
+  ansible.builtin.file:
+    path: /etc/kubernetes/config
+    owner: root
+    group: root
+    mode: '0750'
+    state: directory
+

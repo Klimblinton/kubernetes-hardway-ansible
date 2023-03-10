@@ -1,0 +1,57 @@
+- name: Generate ca files
+  ansible.builtin.shell:
+    cmd: "cfssl gencert -initca {{ playbook_dir }}/shared/files/ssl/conf/ca-csr-{{ item }}.json | cfssljson -bare {{ playbook_dir }}/shared/files/ssl/ca-{{ item }}"
+    creates: "{{ playbook_dir }}/shared/files/ssl/ca-{{ item }}.pem"
+  with_items:
+    - kubernetes
+    - etcd
+    - kubernetes-front-proxy
+
+- name: Generate key and cert from ca-kubernetes ca for kube-apiserver and kube-apiserver-kubelet-client
+  ansible.builtin.shell:
+    cmd: "cfssl gencert -ca={{ playbook_dir }}/shared/files/ssl/ca-kubernetes.pem -ca-key={{ playbook_dir }}/shared/files/ssl/ca-kubernetes-key.pem --config={{ playbook_dir }}/shared/files/ssl/conf/ca-config.json -profile={{ item.profile }} {{ playbook_dir }}/shared/files/ssl/conf/{{ item.path }}.json | cfssljson -bare {{ playbook_dir }}/shared/files/ssl/{{ item.path }}"
+    creates: "{{ playbook_dir }}/shared/files/ssl/{{ item.path }}.pem"
+  with_items:
+    - path: kube-apiserver
+      profile: kubernetes
+    - path: kube-apiserver-kubelet-client
+      profile: client
+    - path: kube-scheduler
+      profile: client
+    - path: kubernetes-admin
+      profile: client
+    - path: kube-controller-manager
+      profile: client
+    - path: kube-proxy
+      profile: client
+
+- name: Generate key and cert from ca-kubernetes ca for workers nodes
+  ansible.builtin.shell:
+    cmd: "cfssl gencert -ca={{ playbook_dir }}/shared/files/ssl/ca-kubernetes.pem -ca-key={{ playbook_dir }}/shared/files/ssl/ca-kubernetes-key.pem -config={{ playbook_dir }}/shared/files/ssl/conf/ca-config.json -profile=client -hostname={{ item }},{{ hostvars[item].ansible_host }} {{ playbook_dir }}/shared/files/ssl/conf/kube-node-{{ item }}.json | cfssljson -bare {{ playbook_dir }}/shared/files/ssl/node-{{ item }}"
+    creates: "{{ playbook_dir }}/shared/files/ssl/{{ item }}.pem"
+  with_items: "{{ groups['worker_hosts'] }}"
+        
+
+- name: Generate key and cert from ca-etcd ca for kube-etcd, kube-etcd-peer, kube-etcd-healthcheck-client and kube-apiserver-etcd-client
+  ansible.builtin.shell:
+    cmd: "cfssl gencert -ca={{ playbook_dir }}/shared/files/ssl/ca-etcd.pem -ca-key={{ playbook_dir }}/shared/files/ssl/ca-etcd-key.pem -config={{ playbook_dir }}/shared/files/ssl/conf/ca-config.json -profile={{ item.profile }}  {{ playbook_dir }}/shared/files/ssl/conf/{{ item.path }}.json | cfssljson -bare {{ playbook_dir }}/shared/files/ssl/{{ item.path }}"
+    creates: "{{ playbook_dir }}/shared/files/ssl/{{ item.path }}.pem"
+  with_items:
+    - path: kube-etcd
+      profile: server
+    - path: kube-etcd-peer
+      profile: server
+    - path: kube-etcd-healthcheck-client
+      profile: client
+    - path: kube-apiserver-etcd-client
+      profile: client
+
+- name: Generate key and cert from ca-kubernetes-front-proxy-ca ca for front-proxy-client 
+  ansible.builtin.shell:
+    cmd: "cfssl gencert -ca={{ playbook_dir }}/shared/files/ssl/ca-kubernetes-front-proxy.pem -ca-key={{ playbook_dir }}/shared/files/ssl/ca-kubernetes-front-proxy-key.pem --config={{ playbook_dir }}/shared/files/ssl/conf/ca-config.json -profile={{ item.profile }}  {{ playbook_dir }}/shared/files/ssl/conf/{{ item.path }}.json | cfssljson -bare {{ playbook_dir }}/shared/files/ssl/{{ item.path }}"
+    creates: "{{ playbook_dir }}/shared/files/ssl/{{ item }}.pem"
+  with_items:
+    - path: front-proxy-client
+      profile: client
+
+

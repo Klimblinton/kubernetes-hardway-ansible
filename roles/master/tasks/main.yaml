@@ -1,0 +1,51 @@
+- name: Distribute kubeadm, kubectl, kube-apiserver, kube-scheduler and kube-controller-manager binary files
+  import_tasks: distribute-kube-bins.yaml
+
+- name: Create configs
+  import_tasks: create-configs-dirs.yaml
+
+- name: Create ssl dirs
+  import_tasks: "../../shared/tasks/ssl/20-create-ssl-dirs.yaml"
+
+- name: Copy ca pems
+  import_tasks: "../../shared/tasks/ssl/30-copy-ca-pems.yaml"
+
+- name: Copy kubernetes pems
+  import_tasks: "../../shared/tasks/ssl/copy-kubernetes-pems.yaml"
+
+- name: Copy service-account pems
+  import_tasks: "../../shared/tasks/ssl/copy-service-account-pems.yaml"
+
+- name: Copy master pems
+  import_tasks: distribute-master-pems.yaml
+
+- name: Distribute encryption config
+  import_tasks: distribute-encryption-config.yaml
+
+- name: Generate kube-controller-manager config
+  import_tasks: generate-kube-controller-manager-config.yaml
+
+- name: Generate kube-scheduler config
+  import_tasks: generate-kube-scheduler-config.yaml
+
+- name: Generate admin config
+  import_tasks: generate-kube-admin.yaml
+
+- name: Install and debug kube-apiserver service
+  import_tasks: install-kube-apiserver-service.yaml
+
+- name: Install and debug kube-controller-manager service
+  import_tasks: install-kube-controller-manager-service.yaml
+
+- name: Copy kube-scheduler yaml
+  import_tasks: distribute-kube-scheduler-config.yaml
+
+- name: Install and debug kube-scheduler service
+  import_tasks: install-kube-scheduler-service.yaml
+
+- name: Wait controlpane startup
+  import_tasks: wait-controlplane-starts.yaml
+
+- name: Apply clusterroles
+  import_tasks: apply-roles-to-kubectl.yaml
+

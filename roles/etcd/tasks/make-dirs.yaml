@@ -1,0 +1,24 @@
+- name: Create /etc/etcd directroy
+  ansible.builtin.file:
+    path: /etc/etcd
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+
+- name: Create /var/lib/etcd directroy
+  ansible.builtin.file:
+    path: /var/lib/etcd_{{ etcd_name }}
+    owner: root
+    group: root
+    mode: 0700
+    state: directory
+
+- name: Create /etc/kubernetes/pki/etcd directroy
+  ansible.builtin.file:
+    path: "{{ etcd_ssl_base_path }}"
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+    recurse: yes

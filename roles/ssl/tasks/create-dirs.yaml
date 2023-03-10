@@ -1,0 +1,24 @@
+- name: Create ssl config dir
+  ansible.builtin.file:
+    path: "{{ playbook_dir }}/shared/files/ssl/conf"
+    owner: root
+    group: root
+    mode: 0750
+    state: directory
+
+- name: Create csr dir
+  ansible.builtin.file:
+    path: "{{ playbook_dir }}/shared/files/ssl/csr"
+    owner: root
+    group: root
+    mode: 0750
+    state: directory
+
+- name: Create kube certs dirs
+  ansible.builtin.file:
+    path: "{{ playbook_dir }}/shared/files/ssl/etc/kubernetes/pki/etcd"
+    owner: root
+    group: root
+    mode: 0750
+    state: directory
+    recurse: yes

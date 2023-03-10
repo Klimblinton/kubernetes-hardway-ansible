@@ -1,0 +1,16 @@
+- name: Wait until controlplain is started
+  ansible.builtin.command: 
+    argv: 
+      - kubectl 
+      - cluster-info
+      - --kubeconfig 
+      - "{{ kube_etc_base_path }}/admin.conf"
+  register: controlplane_res
+  retries: 5
+  delay: 5
+  until: "'is running at' in controlplane_res.stdout" 
+  
+
+- name: Dump controlplain status
+  ansible.builtin.debug:
+    var: controlplane_res.stdout_lines

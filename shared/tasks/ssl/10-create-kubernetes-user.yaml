@@ -1,0 +1,23 @@
+- name: Ensure kube-cert group exists
+  ansible.builtin.group:
+    name: kube-cert
+    state: present
+    gid: 998
+  tags:
+  - create-kube-user
+
+- name: Ensure kube user exists
+  ansible.builtin.user:
+    name: kube
+    state: present
+    uid: 998
+    group: kube-cert
+    home: /home/kube
+    expires: -1
+    shell: /sbin/nologin
+    comment: Kubernetes user
+  tags:
+  - create-kube-user
+
+
+    

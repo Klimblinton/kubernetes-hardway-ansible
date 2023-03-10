@@ -1,0 +1,20 @@
+---
+- hosts: 127.0.0.1
+  roles: 
+    - ssl
+  vars_files: shared/vars/shared-vars.yaml
+
+- hosts: etcd_hosts
+  roles: 
+    - etcd
+  vars_files: shared/vars/shared-vars.yaml
+
+- hosts: master_hosts
+  roles: 
+    - master
+  vars_files: shared/vars/shared-vars.yaml
+
+- hosts: worker_hosts
+  roles: 
+    - worker
+  vars_files: shared/vars/shared-vars.yaml

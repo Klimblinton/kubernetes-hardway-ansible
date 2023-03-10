@@ -1,0 +1,9 @@
+- name: Copy apiserver cert and keyfile 
+  ansible.builtin.copy:
+    src: "../../shared/files/ssl{{ kube_ssl_base_path }}/{{ item }}"
+    dest: "{{ kube_ssl_base_path }}/{{ item }}"
+  with_items:
+    - apiserver.crt
+    - apiserver.key
+  tags:
+    - distribute-certs

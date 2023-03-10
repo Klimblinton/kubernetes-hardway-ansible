@@ -1,0 +1,35 @@
+# Example hosts inventory
+all:
+  hosts:
+  children:
+    etcd_hosts:
+      hosts:
+        # Sample etcd servers
+        etcd_other.example.com:
+          # Required!
+          ansible_host: 10.0.0.10
+          etcd_name: etcd1
+          etcd_listen_client_port: 2379
+          etcd_listen_peer_port: 2380
+        etcd_other2.example.com:
+          # Required!
+          ansible_host: 10.0.0.12
+          etcd_name: etcd1
+          etcd_listen_client_port: 2381
+          etcd_listen_peer_port: 2382
+          
+
+    master_hosts:
+      hosts:
+        # Sample master servers
+        master[01-03].example.com
+    worker_hosts:
+      hosts:
+        # Sample worker servers
+        # ansible_host is mandatory for right pems generation
+        master_first.example.com: 
+          ansible_host: 10.0.0.1
+        master_second.example.com: 
+          ansible_host: 10.0.0.3
+        master_third.example.com: 
+          ansible_host: 10.0.0.4

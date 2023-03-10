@@ -1,0 +1,27 @@
+- name: Template kube-scheduler systemd file to master server
+  ansible.builtin.template:
+    src: kube-scheduler.service.j2
+    dest: /etc/systemd/system/kube-scheduler.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+   - Restart kube-scheduler
+
+- name: Enable and start kube-scheduler service
+  ansible.builtin.service:
+    name: kube-scheduler
+    state: started
+    enabled: true 
+
+- name: Check kube-scheduler status
+  ansible.builtin.command:
+    argv: 
+      - systemctl 
+      - status 
+      - kube-scheduler
+  register: kube_scheduler_check
+
+- name: Dump kube-scheduler status
+  ansible.builtin.debug:
+    var: kube_scheduler_check.stdout_lines

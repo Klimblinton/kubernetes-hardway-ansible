@@ -1,0 +1,57 @@
+- name: "Distribute worker binaries"
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/shared/files/binaries/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - "crictl-{{ crictl_version }}"
+    - "runc-{{ runc_version }}"
+    - "containerd-{{ containerd_version }}"
+    - "containerd-shim-{{ containerd_version }}"
+    - "containerd-shim-runc-v1-{{ containerd_version }}"
+    - "containerd-shim-runc-v2-{{ containerd_version }}"
+    - "ctr-{{ containerd_version }}"
+    - "kubectl-{{ kubernetes_version }}"
+    - "kubelet-{{ kubernetes_version }}"
+    - "kube-proxy-{{ kubernetes_version }}"
+  tags:
+    - distribute-worker-bins
+    - disribute-bins
+
+- name: Link worker binaries
+  ansible.builtin.file:
+    src: "{{ item.src }}"
+    dest: "/usr/local/bin/{{ item.dst }}"
+    mode: "0777"
+    owner: root
+    group: root
+    state: link
+  with_items:
+    - src: "crictl-{{ crictl_version }}"
+      dst: crictl
+    - src: "runc-{{ runc_version }}"
+      dst: runc
+    - src: "containerd-{{ containerd_version }}"
+      dst: containerd
+    - src: "containerd-shim-{{ containerd_version }}"
+      dst: containerd-shim
+    - src: "containerd-shim-runc-v1-{{ containerd_version }}"
+      dst: containerd-shim-runc-v1
+    - src: "containerd-shim-runc-v2-{{ containerd_version }}"
+      dst: containerd-shim-runc-v2
+    - src: "ctr-{{ containerd_version }}"
+      dst: ctr
+    - src: "kubectl-{{ kubernetes_version }}"
+      dst: kubectl
+    - src: "kubelet-{{ kubernetes_version }}"
+      dst: kubelet
+    - src: "kube-proxy-{{ kubernetes_version }}"
+      dst: kube-proxy
+  tags:
+    - distribute-worker-bins
+    - disribute-bins
+
+
+  

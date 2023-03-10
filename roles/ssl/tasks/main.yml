@@ -1,0 +1,25 @@
+- name: Assert error an exit if not run on same server where playbook is
+  ansible.builtin.fail:
+    msg: Role is not designed to be executed on server other than self (127.0.0.1)
+  when: ansible_host != "127.0.0.1"
+
+- name: Distribute cfssl binary files
+  import_tasks: distribute-bins.yaml
+
+- name: Create ssl dirs
+  import_tasks: create-dirs.yaml
+
+- name: Copy ca configs
+  import_tasks: distribute-ca-configs.yaml
+
+- name: Generate ca, crt and key files
+  import_tasks: generate-ca-crt-key-by-cfssl.yaml
+
+- name: Create private and public sa key files
+  import_tasks: create-rsa-keypair.yaml
+
+- name: Move/rename pems and csrs files 
+  import_tasks: rename-pems.yaml
+
+- name: Move/rename node pems and csrs files 
+  import_tasks: rename-node-pems.yaml

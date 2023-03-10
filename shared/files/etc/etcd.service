@@ -1,0 +1,16 @@
+[Unit]
+Sescription=etcd
+After=network.target
+
+[Service]
+Type=notify
+User=root
+EnviromentFile=/etc/etcd.env
+ExecStart=/usr/local/bin/etcd
+NotifyAccess=all
+Restart=always
+RestartSec=10s
+LimitNOFILE=40000
+
+[Install]
+WantedBy=multi-user.target

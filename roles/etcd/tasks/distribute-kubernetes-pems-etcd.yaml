@@ -1,0 +1,17 @@
+- name: Copy etcd certs and keyfiles 
+  ansible.builtin.copy:
+    src: "../../shared/files/ssl/{{ etcd_ssl_base_path }}/{{ item }}"
+    dest: "{{ etcd_ssl_base_path }}/{{ item }}"
+    force: false
+  with_items:
+    - ca.crt
+    - ca.key
+    - server.crt
+    - server.key
+    - healthcheck-client.crt
+    - healthcheck-client.key
+    - peer.crt
+    - peer.key
+  tags:
+    - distribute-certs
+    - distribute-etcd-certs
