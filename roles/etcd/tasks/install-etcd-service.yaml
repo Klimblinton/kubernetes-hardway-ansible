@@ -23,7 +23,7 @@
 - name: Check etcd status
   ansible.builtin.command:
     argv: 
-      - etcdctl
+      - /usr/local/bin/etcdctl
       - member 
       - list 
       - --endpoints=https://127.0.0.1:{{ etcd_listen_client_port }}
