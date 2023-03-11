@@ -24,7 +24,7 @@ ExecStart=/usr/local/bin/kube-apiserver \
   --kubelet-certificate-authority={{ kube_ssl_base_path }}/ca.crt \
   --kubelet-client-certificate={{ kube_ssl_base_path }}/apiserver-kubelet-client.crt \
   --kubelet-client-key={{ kube_ssl_base_path }}/apiserver-kubelet-client.key \
-  --runtime-config='api/all=true' \
+  --runtime-config=api/all=true \
   --service-account-key-file={{ kube_ssl_base_path }}/sa.pub \
   --service-account-signing-key-file={{ kube_ssl_base_path }}/sa.key \
   --service-account-issuer=https://{{ kube_api_addr }}:6443 \
