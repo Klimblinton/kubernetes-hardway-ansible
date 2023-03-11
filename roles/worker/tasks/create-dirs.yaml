@@ -23,4 +23,12 @@
     state: directory
     recurse: yes
 
+- name: Create /etc/kubernetes/pki directory
+  ansible.builtin.file:
+    path: /etc/kubernetes/pki
+    owner: root
+    group: root
+    mode: '0750'
+    state: directory
+    recurse: yes
 
