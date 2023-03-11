@@ -31,3 +31,14 @@
   tags:
   - create-ssl-dir
   - create-kube-dirs
+
+- name: Create etcd etc ssl directory
+  ansible.builtin.file:
+    state: directory
+    path: "{{ etcd_ssl_base_path }}"
+    mode: 0755
+    owner: root
+    group: root
+  tags:
+  - create-ssl-dir
+  - create-kube-dirs

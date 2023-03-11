@@ -19,6 +19,7 @@
     - kubernetes-admin.key
     - apiserver-etcd-client.crt
     - apiserver-etcd-client.key
+    - etcd/ca.crt
   notify:
    - Restart kube-apiserver
   tags:
