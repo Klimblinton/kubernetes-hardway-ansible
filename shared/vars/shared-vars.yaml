@@ -18,7 +18,7 @@ kube_cluster_dns: "10.32.0.10"
 # get by ENCRYPTION_KEY=$(head -c 32 /dev/urandom | base64)
 controller_encryption_key: "Tb98x8Ud9hoWVJOqTk0tfGayvpm3zN6EhOwSOQ8Ef0w=" 
 
-kubernetes_version: v1.23.12
+kubernetes_version: v1.23.17 # stable download at https://www.downloadkubernetes.com/
 kubectl_version: v1.23.12
 kubelet_version: v1.23.12
 kubeadm_version: v1.23.12 
