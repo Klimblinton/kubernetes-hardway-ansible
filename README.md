@@ -11,3 +11,4 @@ https://github.com/kelseyhightower/kubernetes-the-hard-way/blob/master/docs/06-d
 7. ==Add tags to all tasks==
 8. Add Etcd replicas howto
 9. Add ssl generation howto
+10. Works on Ubuntu 22.04, should add E7 Support (etcd > 3.2 and kube-apiserver Segfault)
