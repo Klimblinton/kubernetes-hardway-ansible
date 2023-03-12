@@ -26,7 +26,6 @@ kubeadm_version: v1.23.12
 cni_version: v1.2.0
 
 etcd_version: v3.2.32
-etcdtool_version: v3.5.5
 runc_version: v1.1.3  
 containerd_version: "1.6.19"
 crictl_version: v1.23.0
