@@ -14,7 +14,7 @@
     - distribute-images
   
 
-- name: Generate cred for worker node from kubectl
+- name: Load image to containerd, namespace k8s.io
   ansible.builtin.command:
     argv: 
       - /usr/local/bin/ctr
