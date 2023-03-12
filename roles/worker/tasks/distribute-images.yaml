@@ -1,0 +1,31 @@
+
+
+- name: Distribute container images to start base services
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/shared/images/{{ item }}.tar"
+    dest: "/opt/images/{{ item }}.tar"
+  with_items: 
+    - coredns-{{ images.coredns_version }}
+    - cpa-{{ images.cpa_version }}
+    - jessie-dnsutils-{{ images.jessie-dnsutils_version }}
+    - pause-{{ images.pause_version }}
+    - tigera-operator-{{ images.tigera-operator_version }}  
+  tags:
+    - distribute-images
+  
+
+- name: Generate cred for worker node from kubectl
+  ansible.builtin.command:
+    argv: 
+      - /usr/local/bin/ctr
+      - image
+      - import 
+      - "/opt/images/{{ item }}.tar"
+  with_items: 
+    - coredns-{{ images.coredns_version }}
+    - cpa-{{ images.cpa_version }}
+    - jessie-dnsutils-{{ images.jessie-dnsutils_version }}
+    - pause-{{ images.pause_version }}
+    - tigera-operator-{{ images.tigera-operator_version }}
+  tags:
+    - distribute-images

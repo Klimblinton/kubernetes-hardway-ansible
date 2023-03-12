@@ -32,6 +32,13 @@ crictl_version: v1.23.0
 cfssl_version: v1.6.3
 cfssljson_version: v1.6.3
 
+images:
+  coredns_version: v1.94
+  cpa_version: v1.8.5
+  jessie-dnsutils_version: v1.3
+  pause_version: 3.6
+  tigera-operator_version: v1.29
+
 cfssl:
   version: v1.6.3
   country: RU
