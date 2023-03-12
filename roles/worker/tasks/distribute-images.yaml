@@ -18,6 +18,8 @@
   ansible.builtin.command:
     argv: 
       - /usr/local/bin/ctr
+      - -n 
+      - k8s.io
       - image
       - import 
       - "/opt/images/{{ item }}.tar"
