@@ -7,7 +7,7 @@
   with_items: 
     - "coredns-{{ images.coredns_version }}"
     - "cpa-{{ images.cpa_version }}"
-    - "jessiednsutils-{{ images.jessie_dnsutils_version }}"
+    - "jessie-dnsutils-{{ images.jessie_dnsutils_version }}"
     - "pause-{{ images.pause_version }}"
     - "tigera-operator-{{ images.tigera_operator_version }}"
   tags:
