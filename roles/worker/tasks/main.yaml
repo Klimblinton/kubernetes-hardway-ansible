@@ -34,4 +34,6 @@
 - name: Distribute systemd configs and install containerd, kube-proxy and kubelet services
   import_tasks: install-services.yaml
 
+- name: Distribute preload images
+  import_tasks: distribute-images.yaml
 
