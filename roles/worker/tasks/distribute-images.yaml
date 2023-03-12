@@ -5,11 +5,11 @@
     src: "{{ playbook_dir }}/shared/images/{{ item }}.tar"
     dest: "/opt/images/{{ item }}.tar"
   with_items: 
-    - coredns-{{ images.coredns_version }}
-    - cpa-{{ images.cpa_version }}
-    - jessie-dnsutils-{{ images.jessie-dnsutils_version }}
-    - pause-{{ images.pause_version }}
-    - tigera-operator-{{ images.tigera-operator_version }}  
+    - "coredns-{{ images.coredns_version }}"
+    - "cpa-{{ images.cpa_version }}"
+    - "jessie-dnsutils-{{ images.jessie-dnsutils_version }}"
+    - "pause-{{ images.pause_version }}"
+    - "tigera-operator-{{ images.tigera-operator_version }}"
   tags:
     - distribute-images
   
@@ -22,10 +22,10 @@
       - import 
       - "/opt/images/{{ item }}.tar"
   with_items: 
-    - coredns-{{ images.coredns_version }}
-    - cpa-{{ images.cpa_version }}
-    - jessie-dnsutils-{{ images.jessie-dnsutils_version }}
-    - pause-{{ images.pause_version }}
-    - tigera-operator-{{ images.tigera-operator_version }}
+    - "coredns-{{ images.coredns_version }}"
+    - "cpa-{{ images.cpa_version }}"
+    - "jessie-dnsutils-{{ images.jessie-dnsutils_version }}"
+    - "pause-{{ images.pause_version }}"
+    - "tigera-operator-{{ images.tigera-operator_version }}"
   tags:
     - distribute-images
