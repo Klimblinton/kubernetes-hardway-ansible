@@ -17,7 +17,7 @@
     - "pause-{{ images.pause_version }}"
     - "tigera-operator-{{ images.tigera_operator_version }}"
     - "calico_kube_controllers-{{ images.calico_kube_controllers_version }}"
-    - "calico_apiserver-{{ calico_apiserver_version }}"
+    - "calico_apiserver-{{ images.calico_apiserver_version }}"
   tags:
     - distribute-images
   
@@ -44,6 +44,6 @@
     - "pause-{{ images.pause_version }}"
     - "tigera-operator-{{ images.tigera_operator_version }}"
     - "calico_kube_controllers-{{ images.calico_kube_controllers_version }}"
-    - "calico_apiserver-{{ calico_apiserver_version }}"
+    - "calico_apiserver-{{ images.calico_apiserver_version }}"
   tags:
     - distribute-images
