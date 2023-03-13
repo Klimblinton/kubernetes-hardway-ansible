@@ -43,4 +43,20 @@
   tags:
     - distribute-images
 
+- name: Create /opt/cni/bin directory for kubelet
+  ansible.builtin.file:
+    path: /opt/cni/bin
+    owner: root
+    group: root
+    mode: '0750'
+    state: directory
+    recurse: yes
 
+ name: Link cni bins to /opt/cni/bin
+  ansible.builtin.file:
+    src: "/usr/local/bin/cni-plugins-{{ cni_version }}"
+    dest: "/opt/cni/bin"
+    mode: "0777"
+    owner: root
+    group: root
+    state: link
