@@ -43,9 +43,9 @@
   tags:
     - distribute-images
 
-- name: Create /opt/cni/bin directory for kubelet
+- name: Create /opt/cni directory for kubelet
   ansible.builtin.file:
-    path: /opt/cni/bin
+    path: /opt/cni
     owner: root
     group: root
     mode: '0750'
