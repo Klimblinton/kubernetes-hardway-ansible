@@ -1,0 +1,28 @@
+- name: Deploy namespaces
+  ansible.builtin.command: 
+    argv: 
+      - /usr/local/bin/kubectl 
+      - create
+      - namespace
+      - {{ item }}
+      - --kubeconfig 
+      - "{{ kube_etc_base_path }}/admin.conf"
+  with_items:
+    - coredns
+
+- name: Deploy helm charts
+  ansible.builtin.command: 
+    argv: 
+      - /usr/local/bin/helm 
+      - install
+      - -n 
+      - {{ item.namespace }}
+      - {{ item.chart }}
+      - {{ playbook_dir }}/shared/helm/charts/{{ item.chart }}
+      - f
+      - {{ playbook_dir }}/shared/helm/charts/{{ item.chart }}/values.yml
+      - --kubeconfig 
+      - "{{ kube_etc_base_path }}/admin.conf"
+  with_items:
+    - chart: coredns
+      namespace: coredns

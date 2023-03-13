@@ -1,115 +1,35 @@
 - name: Distribute kubectl binary
   ansible.builtin.copy:
-    src: "../../shared/files/binaries/kubectl-{{ kubernetes_version }}"
-    dest: "/usr/local/bin/kubectl-{{ kubernetes_version }}"
+    src: "../../shared/files/binaries/{{ item }}-{{ kubernetes_version }}"
+    dest: "/usr/local/bin/{{ item }}-{{ kubernetes_version }}"
     owner: root
     group: root
     mode: 0755
+  with_items:
+    - kubectl
+    - kubeadm
+    - kube-apiserver
+    - kube-controller-manager
+    - kube-scheduler
   tags:
     - distribute-bins
-    - disribute-kubectl-bin
+    - disribute-kube-bins
 
 - name: Link kubectl binary  
   ansible.builtin.file:
-    src: "kubectl-{{ kubernetes_version }}"
-    dest: "/usr/local/bin/kubectl"
+    src: "{{ item }}-{{ kubernetes_version }}"
+    dest: "/usr/local/bin/{{ item }}"
     mode: "0777"
     owner: root
     group: root
     state: link
+  with_items:
+    - kubectl
+    - kubeadm
+    - kube-apiserver
+    - kube-controller-manager
+    - kube-scheduler
   tags:
     - distribute-bins
-    - disribute-kubectl-bin
+    - disribute-kube-bins
 
-- name: Distribute kubeadm binary
-  ansible.builtin.copy:
-    src: "../../shared/files/binaries/kubeadm-{{ kubernetes_version }}"
-    dest: "/usr/local/bin/kubeadm-{{ kubernetes_version }}"
-    owner: root
-    group: root
-    mode: 0755
-  tags:
-    - distribute-bins
-    - disribute-kubeadm-bin
-
-- name: Link kubeadm binary  
-  ansible.builtin.file:
-    src: "kubeadm-{{ kubernetes_version }}"
-    dest: "/usr/local/bin/kubeadm"
-    mode: "0777"
-    owner: root
-    group: root
-    state: link
-  tags:
-    - distribute-bins
-    - disribute-kubeadm-bin
-
-- name: Distribute kube-apiserver binary
-  ansible.builtin.copy:
-    src: "../../shared/files/binaries/kube-apiserver-{{ kubernetes_version }}"
-    dest: "/usr/local/bin/kube-apiserver-{{ kubernetes_version }}"
-    owner: root
-    group: root
-    mode: 0755
-  tags:
-    - distribute-bins
-    - disribute-kube-apiserver-bin
-
-- name: Link kube-apiserver binary  
-  ansible.builtin.file:
-    src: "kube-apiserver-{{ kubernetes_version }}"
-    dest: "/usr/local/bin/kube-apiserver"
-    mode: "0777"
-    owner: root
-    group: root
-    state: link
-  tags:
-    - distribute-bins
-    - disribute-kube-apiserver-bin
-
-  
-- name: Distribute kube-controller-manager binary
-  ansible.builtin.copy:
-    src: "../../shared/files/binaries/kube-controller-manager-{{ kubernetes_version }}"
-    dest: "/usr/local/bin/kube-controller-manager-{{ kubernetes_version }}"
-    owner: root
-    group: root
-    mode: 0755
-  tags:
-    - distribute-bins
-    - disribute-kube-controller-manager-bin
-
-- name: Link kube-controller-manager binary  
-  ansible.builtin.file:
-    src: "kube-controller-manager-{{ kubernetes_version }}"
-    dest: "/usr/local/bin/kube-controller-manager"
-    mode: "0777"
-    owner: root
-    group: root
-    state: link
-  tags:
-    - distribute-bins
-    - disribute-kube-controller-manager-bin
-
-- name: Distribute kube-scheduler binary
-  ansible.builtin.copy:
-    src: "../../shared/files/binaries/kube-scheduler-{{ kubernetes_version }}"
-    dest: "/usr/local/bin/kube-scheduler-{{ kubernetes_version }}"
-    owner: root
-    group: root
-    mode: 0755
-  tags:
-    - distribute-bins
-    - disribute-kube-scheduler-bin
-
-- name: Link kube-scheduler binary  
-  ansible.builtin.file:
-    src: "kube-scheduler-{{ kubernetes_version }}"
-    dest: "/usr/local/bin/kube-scheduler"
-    mode: "0777"
-    owner: root
-    group: root
-    state: link
-  tags:
-    - distribute-bins
-    - disribute-kube-scheduler-bin

@@ -1,0 +1,23 @@
+- name: Distribute helm binary
+  ansible.builtin.copy:
+    src: "../../shared/files/binaries/helm-{{ helm_version }}"
+    dest: "/usr/local/bin/helm-{{ helm_version }}"
+    owner: root
+    group: root
+    mode: 0755
+  tags:
+    - distribute-bins
+    - disribute-helm-bin
+
+- name: Link helm binary  
+  ansible.builtin.file:
+    src: "helm-{{ helm_version }}"
+    dest: "/usr/local/bin/helm"
+    mode: "0777"
+    owner: root
+    group: root
+    state: link
+  tags:
+    - distribute-bins
+    - disribute-helm-bin
+

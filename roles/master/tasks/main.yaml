@@ -1,6 +1,9 @@
 - name: Distribute kubeadm, kubectl, kube-apiserver, kube-scheduler and kube-controller-manager binary files
   import_tasks: distribute-kube-bins.yaml
 
+- name: Distribute helm binary file
+  import_tasks: distribute-helm-bin.yaml
+
 - name: Create configs
   import_tasks: create-configs-dirs.yaml
 
