@@ -4,7 +4,7 @@
       - /usr/local/bin/kubectl 
       - create
       - namespace
-      - {{ item }}
+      - "{{ item }}"
       - --kubeconfig 
       - "{{ kube_etc_base_path }}/admin.conf"
   with_items:
@@ -16,11 +16,11 @@
       - /usr/local/bin/helm 
       - install
       - -n 
-      - {{ item.namespace }}
-      - {{ item.chart }}
-      - {{ playbook_dir }}/shared/helm/charts/{{ item.chart }}
+      - "{{ item.namespace }}"
+      - "{{ item.chart }}"
+      - "{{ playbook_dir }}/shared/helm/charts/{{ item.chart }}"
       - f
-      - {{ playbook_dir }}/shared/helm/charts/{{ item.chart }}/values.yml
+      - "{{ playbook_dir }}/shared/helm/charts/{{ item.chart }}/values.yml"
       - --kubeconfig 
       - "{{ kube_etc_base_path }}/admin.conf"
   with_items:
