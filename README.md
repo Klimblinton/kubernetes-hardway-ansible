@@ -1,6 +1,6 @@
 # kubernetes-hardway-ansible
 
-##TODO Prerequisities: 
+##TODO Prerequisites: 
 1. Generate encryption key
 https://github.com/kelseyhightower/kubernetes-the-hard-way/blob/master/docs/06-data-encryption-keys.md and put it to a variable into roles/master/vars/main.yaml
 2. Add binaries to shared/files/binaries folder
