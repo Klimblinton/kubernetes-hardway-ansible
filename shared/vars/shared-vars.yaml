@@ -33,7 +33,7 @@ cfssl_version: v1.6.3
 cfssljson_version: v1.6.3
 
 images:
-  coredns_version: v1.94
+  coredns_version: v1.9.4
   cpa_version: v1.8.5
   jessie_dnsutils_version: v1.3
   pause_version: 3.6
