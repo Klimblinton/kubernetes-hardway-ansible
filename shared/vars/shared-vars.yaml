@@ -31,6 +31,7 @@ containerd_version: "1.6.19"
 crictl_version: v1.23.0
 cfssl_version: v1.6.3
 cfssljson_version: v1.6.3
+helm_version: v3.11.2
 
 images:
   coredns_version: v1.9.4
