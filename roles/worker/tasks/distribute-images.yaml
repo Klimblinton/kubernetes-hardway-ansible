@@ -16,7 +16,7 @@
     - "jessie-dnsutils-{{ images.jessie_dnsutils_version }}"
     - "pause-{{ images.pause_version }}"
     - "tigera-operator-{{ images.tigera_operator_version }}"
-    - "calico_kube_controllers-{{ calico_kube_controllers_version }}"
+    - "calico_kube_controllers-{{ images.calico_kube_controllers_version }}"
   tags:
     - distribute-images
   
@@ -42,6 +42,6 @@
     - "jessie-dnsutils-{{ images.jessie_dnsutils_version }}"
     - "pause-{{ images.pause_version }}"
     - "tigera-operator-{{ images.tigera_operator_version }}"
-    - "calico_kube_controllers-{{ calico_kube_controllers_version }}"
+    - "calico_kube_controllers-{{ images.calico_kube_controllers_version }}"
   tags:
     - distribute-images
