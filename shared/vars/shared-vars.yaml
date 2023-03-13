@@ -38,6 +38,12 @@ images:
   jessie_dnsutils_version: v1.3
   pause_version: 3.6
   tigera_operator_version: v1.29.0
+  calico_cni_version: v3.25.0
+  calico_csi_version: v3.25.0
+  calico_node_driver_registrar_version: v3.25.0
+  calico_node_version: v3.25.0
+  calico_pod2daemon_flexvol: v3.25.0
+  calico_typha_version: v3.25.0
 
 cfssl:
   version: v1.6.3

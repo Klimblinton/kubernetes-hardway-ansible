@@ -5,6 +5,12 @@
     src: "{{ playbook_dir }}/shared/images/{{ item }}.tar"
     dest: "/opt/images/{{ item }}.tar"
   with_items: 
+    - "calico_cni-{{ images.calico_cni_version }}"
+    - "calico_csi-{{ images.calico_csi_version }}"
+    - "calico_node_driver_registrar-{{ images.calico_node_driver_registrar_version }}"
+    - "calico_node-{{ images.calico_node_version }}"
+    - "calico_pod2daemon_flexvol-{{ images.calico_pod2daemon_flexvol }}"
+    - "calico_typha-{{ images.calico_typha_version }}"
     - "coredns-{{ images.coredns_version }}"
     - "cpa-{{ images.cpa_version }}"
     - "jessie-dnsutils-{{ images.jessie_dnsutils_version }}"
@@ -24,6 +30,12 @@
       - import 
       - "/opt/images/{{ item }}.tar"
   with_items: 
+    - "calico_cni-{{ images.calico_cni_version }}"
+    - "calico_csi-{{ images.calico_csi_version }}"
+    - "calico_node_driver_registrar-{{ images.calico_node_driver_registrar_version }}"
+    - "calico_node-{{ images.calico_node_version }}"
+    - "calico_pod2daemon_flexvol-{{ images.calico_pod2daemon_flexvol }}"
+    - "calico_typha-{{ images.calico_typha_version }}"
     - "coredns-{{ images.coredns_version }}"
     - "cpa-{{ images.cpa_version }}"
     - "jessie-dnsutils-{{ images.jessie_dnsutils_version }}"
