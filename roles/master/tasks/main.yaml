@@ -52,3 +52,6 @@
 - name: Apply clusterroles
   import_tasks: apply-roles-to-kubectl.yaml
 
+- name: Deploy helm charts
+  import_tasks: deploy-helm-charts.yaml
+
