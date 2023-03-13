@@ -45,6 +45,7 @@ images:
   calico_pod2daemon_flexvol: v3.25.0
   calico_typha_version: v3.25.0
   calico_kube_controllers: v3.25.0
+  calico_apiserver: v3.25.0
 
 cfssl:
   version: v1.6.3
