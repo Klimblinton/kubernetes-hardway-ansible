@@ -11,11 +11,12 @@
     - "calico_node-{{ images.calico_node_version }}"
     - "calico_pod2daemon_flexvol-{{ images.calico_pod2daemon_flexvol }}"
     - "calico_typha-{{ images.calico_typha_version }}"
-    - "coredns-{{ images.coredns_version }}"
+    - "coredns_coredns-{{ images.coredns_version }}"
     - "cpa-{{ images.cpa_version }}"
     - "jessie-dnsutils-{{ images.jessie_dnsutils_version }}"
     - "pause-{{ images.pause_version }}"
     - "tigera-operator-{{ images.tigera_operator_version }}"
+    - "calico_kube_controllers-{{ calico_kube_controllers_version }}"
   tags:
     - distribute-images
   
@@ -36,10 +37,11 @@
     - "calico_node-{{ images.calico_node_version }}"
     - "calico_pod2daemon_flexvol-{{ images.calico_pod2daemon_flexvol }}"
     - "calico_typha-{{ images.calico_typha_version }}"
-    - "coredns-{{ images.coredns_version }}"
+    - "coredns_coredns-{{ images.coredns_version }}"
     - "cpa-{{ images.cpa_version }}"
     - "jessie-dnsutils-{{ images.jessie_dnsutils_version }}"
     - "pause-{{ images.pause_version }}"
     - "tigera-operator-{{ images.tigera_operator_version }}"
+    - "calico_kube_controllers-{{ calico_kube_controllers_version }}"
   tags:
     - distribute-images
