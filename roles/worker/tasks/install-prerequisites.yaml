@@ -4,5 +4,4 @@
       - socat
       - conntrack
       - ipset
-      - systemd-resolved
     state: present
