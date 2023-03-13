@@ -52,7 +52,7 @@
     state: directory
     recurse: yes
 
- name: Link cni bins to /opt/cni/bin
+- name: Link cni bins to /opt/cni/bin
   ansible.builtin.file:
     src: "/usr/local/bin/cni-plugins-{{ cni_version }}"
     dest: "/opt/cni/bin"
