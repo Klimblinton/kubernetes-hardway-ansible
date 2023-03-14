@@ -1,11 +1,19 @@
-- name: Template bridge netowork config
+- name: Template bridge network config of cni0 bridge
   ansible.builtin.template:
-    src: etc/net.d/10-bridge.conf.j2
-    dest: /etc/cni/net.d/10-bridge.conf
+    src: etc/net.d/10-bridge-cni0.conf.j2
+    dest: /etc/cni/net.d/10-bridge-cni0.conf
     owner: root
     group: root
     mode: 0644
-  
+
+- name: Template bridge network config of cni1 bridge
+  ansible.builtin.template:
+    src: etc/net.d/20-bridge-cni1.conf.j2
+    dest: /etc/cni/net.d/20-bridge-cni1.conf
+    owner: root
+    group: root
+    mode: 0644 
+
 - name: Template loopback network config
   ansible.builtin.template:
     src: etc/net.d/99-loopback.conf.j2
