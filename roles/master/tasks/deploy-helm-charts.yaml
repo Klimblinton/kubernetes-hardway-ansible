@@ -24,13 +24,14 @@
   ansible.builtin.command: 
     argv: 
       - /usr/local/bin/helm 
-      - install
+      - upgrade
+      - --install
       - -n 
       - "{{ item.namespace }}"
       - "{{ item.chart }}"
       - "/tmp/helm/charts/{{ item.chart }}"
-      - f
-      - "/tmp/helm/charts/{{ item.chart }}/values.yml"
+      - -f
+      - "/tmp/helm/charts/{{ item.chart }}/values.yaml"
       - --create-namespace
       - --kubeconfig 
       - "{{ kube_etc_base_path }}/admin.conf"
