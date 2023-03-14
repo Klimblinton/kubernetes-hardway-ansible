@@ -11,7 +11,7 @@ authorization:
   mode: Webhook
 clusterDomain: "{{ kube_cluster_domain }}"
 clusterDNS:
-  - "{{ kube_cluster_domain }}"
+  - "{{ kube_cluster_dns }}"
 podCIDR: "{{ kube_pod_network_cidr }}"
 resolvConf: "/etc/resolv.conf"
 runtimeRequestTimeout: "15m"
