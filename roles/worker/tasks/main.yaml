@@ -4,6 +4,12 @@
 - name: Disable swap
   import_tasks: disable-swap.yaml
 
+- name: Distribute cni binary files
+  import_tasks: distribute-bins/distribute-cni-bins.yaml
+
+- name: Distribute shared binary files 
+  import_tasks: "../../shared/tasks/bins/distribute-shared-bins.yaml"
+
 - name: Create dirs for config files
   import_tasks: create-dirs.yaml
 
@@ -12,12 +18,6 @@
 
 - name: Distribute worker binary files
   import_tasks: distribute-bins/distribute-worker-bins.yaml
-
-- name: Distribute cni binary files
-  import_tasks: distribute-bins/distribute-cni-bins.yaml
-
-- name: Distribute shared binary files 
-  import_tasks: "../../shared/tasks/bins/distribute-shared-bins.yaml"
 
 - name: Generate kubectl worker config
   import_tasks: generate-kubectl-config.yaml
