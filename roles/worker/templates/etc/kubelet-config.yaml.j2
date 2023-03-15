@@ -14,5 +14,5 @@ clusterDNS:
   - "{{ kube_cluster_dns }}"
 podCIDR: "{{ kube_pod_network_cidr }}"
 runtimeRequestTimeout: "15m"
-tlsCertFile: "/var/lib/kubelet/pki/worker-node-{{ inventory_hostname }}.crt"
-tlsPrivateKeyFile: "/var/lib/kubelet/pki/worker-node-{{ inventory_hostname }}.key"
+tlsCertFile: "/var/lib/kubelet/pki/node-{{ inventory_hostname }}.crt"
+tlsPrivateKeyFile: "/var/lib/kubelet/pki/node-{{ inventory_hostname }}.key"
