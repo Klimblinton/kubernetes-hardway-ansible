@@ -48,4 +48,6 @@
     owner: root
     group: root
     mode: 0644
-  with_items: "{{ groups['worker_hosts'] }}"
+  with_items: 
+    - "{{ groups['worker_hosts'] }}"
+    - "{{ groups['master_hosts'] }}"

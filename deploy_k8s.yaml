@@ -12,6 +12,7 @@
 - hosts: master_hosts
   roles: 
     - master
+    - worker
   vars_files: shared/vars/shared-vars.yaml
 
 - hosts: worker_hosts

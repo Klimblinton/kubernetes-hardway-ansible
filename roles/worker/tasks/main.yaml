@@ -8,7 +8,7 @@
   import_tasks: create-dirs.yaml
 
 - name: Copy ca.crt, node cert and key file 
-  import_tasks: distribute-worker-node-certs.yaml
+  import_tasks: distribute-node-certs.yaml
 
 - name: Distribute worker binary files
   import_tasks: distribute-bins/distribute-worker-bins.yaml

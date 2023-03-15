@@ -7,16 +7,16 @@
 
 - name: Copy worker node (kubelet) cert file  
   ansible.builtin.copy:
-    src: "{{ playbook_dir }}/shared/files/ssl{{ kube_ssl_base_path }}/worker-node-{{ inventory_hostname }}.crt"
-    dest: "/var/lib/kubelet/pki/worker-node-{{ inventory_hostname }}.crt"
+    src: "{{ playbook_dir }}/shared/files/ssl{{ kube_ssl_base_path }}/node-{{ inventory_hostname }}.crt"
+    dest: "/var/lib/kubelet/pki/node-{{ inventory_hostname }}.crt"
   tags:
     - distribute-certs
     - distribute-worker-certs
 
 - name: Copy worker node (kubelet) key file  
   ansible.builtin.copy:
-    src: "{{ playbook_dir }}/shared/files/ssl{{ kube_ssl_base_path }}/worker-node-{{ inventory_hostname }}.key"
-    dest: "/var/lib/kubelet/pki/worker-node-{{ inventory_hostname }}.key"
+    src: "{{ playbook_dir }}/shared/files/ssl{{ kube_ssl_base_path }}/node-{{ inventory_hostname }}.key"
+    dest: "/var/lib/kubelet/pki/node-{{ inventory_hostname }}.key"
   tags:
     - distribute-certs
     - distribute-worker-certs
