@@ -8,7 +8,7 @@
   import_tasks: create-dirs.yaml
 
 - name: Copy ca.crt, node cert and key file 
-  import_tasks: distribute-node-certs.yaml
+  import_tasks: distribute-worker-node-certs.yaml
 
 - name: Distribute worker binary files
   import_tasks: distribute-bins/distribute-worker-bins.yaml
@@ -25,8 +25,8 @@
 - name: Generate kube-proxy config
   import_tasks: generate-kubeproxy-config.yaml
 
-- name: Distribute network configs
-  import_tasks: distribute-network-configs.yaml
+#- name: Distribute network configs
+#  import_tasks: distribute-network-configs.yaml
 
 - name: Distribute service configs
   import_tasks: distribute-configs.yaml

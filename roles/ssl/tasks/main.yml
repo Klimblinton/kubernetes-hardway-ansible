@@ -21,5 +21,8 @@
 - name: Move/rename pems and csrs files 
   import_tasks: rename-pems.yaml
 
-- name: Move/rename node pems and csrs files 
-  import_tasks: rename-node-pems.yaml
+- name: Move/rename worker node pems and csrs files 
+  import_tasks: rename-worker-node-pems.yaml
+
+- name: Move/rename master node pems and csrs files 
+  import_tasks: rename-master-node-pems.yaml
