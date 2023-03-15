@@ -20,4 +20,3 @@
     - containerd
     - kube-proxy
     - kubelet
-    - systemd-resolved
