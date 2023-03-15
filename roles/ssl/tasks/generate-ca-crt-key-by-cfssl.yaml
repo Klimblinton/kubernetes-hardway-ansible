@@ -25,12 +25,18 @@
     - path: kube-proxy
       profile: client
 
-- name: Generate key and cert from ca-kubernetes ca for workers nodes
+- name: Generate key and cert from ca-kubernetes ca for worker nodes
   ansible.builtin.shell:
-    cmd: "cfssl gencert -ca={{ playbook_dir }}/shared/files/ssl/ca-kubernetes.pem -ca-key={{ playbook_dir }}/shared/files/ssl/ca-kubernetes-key.pem -config={{ playbook_dir }}/shared/files/ssl/conf/ca-config.json -profile=server -hostname={{ item }},{{ hostvars[item].ansible_host }} {{ playbook_dir }}/shared/files/ssl/conf/kube-node-{{ item }}.json | cfssljson -bare {{ playbook_dir }}/shared/files/ssl/node-{{ item }}"
+    cmd: "cfssl gencert -ca={{ playbook_dir }}/shared/files/ssl/ca-kubernetes.pem -ca-key={{ playbook_dir }}/shared/files/ssl/ca-kubernetes-key.pem -config={{ playbook_dir }}/shared/files/ssl/conf/ca-config.json -profile=server -hostname={{ item }},{{ hostvars[item].ansible_host }} {{ playbook_dir }}/shared/files/ssl/conf/kube-worker-node-{{ item }}.json | cfssljson -bare {{ playbook_dir }}/shared/files/ssl/worker-node-{{ item }}"
     creates: "{{ playbook_dir }}/shared/files/ssl/{{ item }}.pem"
   with_items: "{{ groups['worker_hosts'] }}"
         
+- name: Generate key and cert from ca-kubernetes ca for master nodes
+  ansible.builtin.shell:
+    cmd: "cfssl gencert -ca={{ playbook_dir }}/shared/files/ssl/ca-kubernetes.pem -ca-key={{ playbook_dir }}/shared/files/ssl/ca-kubernetes-key.pem -config={{ playbook_dir }}/shared/files/ssl/conf/ca-config.json -profile=server -hostname={{ item }},{{ hostvars[item].ansible_host }} {{ playbook_dir }}/shared/files/ssl/conf/kube-master-node-{{ item }}.json | cfssljson -bare {{ playbook_dir }}/shared/files/ssl/amster-node-{{ item }}"
+    creates: "{{ playbook_dir }}/shared/files/ssl/{{ item }}.pem"
+  with_items: "{{ groups['worker_hosts'] }}"
+     
 
 - name: Generate key and cert from ca-etcd ca for kube-etcd, kube-etcd-peer, kube-etcd-healthcheck-client and kube-apiserver-etcd-client
   ansible.builtin.shell:
