@@ -47,6 +47,10 @@ images:
   calico_typha_version: v3.25.0
   calico_kube_controllers: v3.25.0
   calico_apiserver: v3.25.0
+  defaultbackend_amd64_version: 1.5
+  ingress_nginx_controller: v1.6.4
+  ingress_nginx_kube_webhook_certgen: v20220916
+  ingress_nginx_opentelemetry: v20230107
 
 cfssl:
   version: v1.6.3
