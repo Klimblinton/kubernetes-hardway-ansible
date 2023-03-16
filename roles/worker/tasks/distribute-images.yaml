@@ -45,5 +45,9 @@
     - "tigera-operator-{{ images.tigera_operator_version }}"
     - "calico_kube_controllers-{{ images.calico_kube_controllers_version }}"
     - "calico_apiserver-{{ images.calico_apiserver_version }}"
+    - "defaultbackend_amd64-{{ images.calico_apiserver_version }}"
+    - "ingress_nginx_controller-{{ images.ingress_nginx_controller }}"
+    - "ingress_nginx_kube_webhook_certgen-{{ images.ingress_nginx_kube_webhook_certgen }}"
+    - "ingress_nginx_opentelemetry-{{ images.ingress_nginx_opentelemetry }}"
   tags:
     - distribute-images
