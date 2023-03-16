@@ -51,6 +51,8 @@ images:
   ingress_nginx_controller: v1.6.4
   ingress_nginx_kube_webhook_certgen: v20220916
   ingress_nginx_opentelemetry: v20230107
+  octopus_app_version: gorm
+  octopus_auth_version: v1
 
 cfssl:
   version: v1.6.3
