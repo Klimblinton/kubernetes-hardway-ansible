@@ -22,8 +22,8 @@
     - "ingress_nginx_controller-{{ images.ingress_nginx_controller }}"
     - "ingress_nginx_kube_webhook_certgen-{{ images.ingress_nginx_kube_webhook_certgen }}"
     - "ingress_nginx_opentelemetry-{{ images.ingress_nginx_opentelemetry }}"
-    - "octopus_app-{{ octopus_app_version }}"
-    - "octopus_auth-{{ octopus_auth_version }}"
+    - "octopus_app-{{ images.octopus_app_version }}"
+    - "octopus_auth-{{ images.octopus_auth_version }}"
   tags:
     - distribute-images
   
@@ -55,7 +55,7 @@
     - "ingress_nginx_controller-{{ images.ingress_nginx_controller }}"
     - "ingress_nginx_kube_webhook_certgen-{{ images.ingress_nginx_kube_webhook_certgen }}"
     - "ingress_nginx_opentelemetry-{{ images.ingress_nginx_opentelemetry }}"
-    - "octopus_app-{{ octopus_app_version }}"
-    - "octopus_auth-{{ octopus_auth_version }}"
+    - "octopus_app-{{ images.octopus_app_version }}"
+    - "octopus_auth-{{ images.octopus_auth_version }}"
   tags:
     - distribute-images
