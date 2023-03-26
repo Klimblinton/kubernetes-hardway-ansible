@@ -9,7 +9,9 @@
       - --embed-certs=true
       - "--server=https://{{ kube_api_addr }}:6443"
       - --kubeconfig=/var/lib/kubelet/kube-proxy.kubeconfig
-
+  tags:
+    - configure-worker
+    - make-kube-proxy-conf
 
 - name: Generate cred for kube-proxy from kubectl
   ansible.builtin.command:
@@ -22,6 +24,9 @@
       - --client-key=/var/lib/kubelet/pki/kube-proxy.key
       - --embed-certs=true
       - --kubeconfig=/var/lib/kubelet/kube-proxy.kubeconfig
+  tags:
+    - configure-worker
+    - make-kube-proxy-conf
    
 
 - name: Link user cred with kube-proxy from kubectl
@@ -34,8 +39,10 @@
       - "--cluster={{ kube_name }}"
       - --user=system:kube-proxy
       - --kubeconfig=/var/lib/kubelet/kube-proxy.kubeconfig
+  tags:
+    - configure-worker
+    - make-kube-proxy-conf
    
-
 - name: Set linked context user cred with kube-proxy from kubectl
   ansible.builtin.command:
     argv: 
@@ -44,4 +51,7 @@
       - use-context 
       - default 
       - --kubeconfig=/var/lib/kubelet/kube-proxy.kubeconfig
+  tags:
+    - configure-worker
+    - make-kube-proxy-conf
  

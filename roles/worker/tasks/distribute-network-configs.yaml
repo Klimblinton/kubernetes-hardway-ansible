@@ -5,6 +5,9 @@
     owner: root
     group: root
     mode: 0644
+  tags:
+    - distribute-network-configs
+    - distribute-configs
 
 - name: Template bridge network config of cni1 bridge
   ansible.builtin.template:
@@ -13,6 +16,9 @@
     owner: root
     group: root
     mode: 0644 
+  tags:
+    - distribute-network-configs
+    - distribute-configs
 
 - name: Template loopback network config
   ansible.builtin.template:
@@ -21,4 +27,7 @@
     owner: root
     group: root
     mode: 0644
+  tags:
+    - distribute-network-configs
+    - distribute-configs
   

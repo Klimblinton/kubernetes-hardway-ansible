@@ -9,8 +9,10 @@
       - --embed-certs=true
       - "--server=https://{{ kube_api_addr }}:6443"
       - --kubeconfig=/var/lib/kubelet/kubelet.kubeconfig
+  tags:
+    - configure-worker
+    - make-kubectl-conf
  
-
 - name: Generate cred for worker node from kubectl
   ansible.builtin.command:
     argv: 
@@ -22,6 +24,9 @@
       - "--client-key=/var/lib/kubelet/pki/node-{{ inventory_hostname }}.key"
       - --embed-certs=true
       - --kubeconfig=/var/lib/kubelet/kubelet.kubeconfig
+  tags:
+    - configure-worker
+    - make-kubectl-conf
     
 
 - name: Link user cred with node from kubectl
@@ -34,6 +39,9 @@
       - "--cluster={{ kube_name }}"
       - "--user=system:node:{{ inventory_hostname }}"
       - --kubeconfig=/var/lib/kubelet/kubelet.kubeconfig
+  tags:
+    - configure-worker
+    - make-kubectl-conf
   
 
 - name: Set linked context user cred with node from kubectl
@@ -44,4 +52,7 @@
       - use-context 
       - default 
       - --kubeconfig=/var/lib/kubelet/kubelet.kubeconfig
+  tags:
+    - configure-worker
+    - make-kubectl-conf
 

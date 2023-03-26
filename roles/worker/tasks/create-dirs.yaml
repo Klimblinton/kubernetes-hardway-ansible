@@ -5,6 +5,8 @@
     group: root
     mode: '0750'
     state: directory
+  tags:
+    - create-dirs
 
 - name: Create /etc/containerd directory
   ansible.builtin.file:
@@ -13,6 +15,8 @@
     group: root
     mode: '0750'
     state: directory
+  tags:
+    - create-dirs
 
 - name: Create /var/lib/kubelet/pki directory
   ansible.builtin.file:
@@ -22,6 +26,8 @@
     mode: '0750'
     state: directory
     recurse: yes
+  tags:
+    - create-dirs
 
 - name: Create /etc/kubernetes/pki directory
   ansible.builtin.file:
@@ -31,6 +37,8 @@
     mode: '0750'
     state: directory
     recurse: yes
+  tags:
+    - create-dirs
 
 - name: Create /opt/images container tar directory
   ansible.builtin.file:
@@ -41,6 +49,7 @@
     state: directory
     recurse: yes
   tags:
+    - create-dirs
     - distribute-images
 
 - name: Create /opt/cni directory for kubelet
@@ -51,6 +60,8 @@
     mode: '0750'
     state: directory
     recurse: yes
+  tags:
+    - create-dirs
 
 - name: Link cni bins to /opt/cni/bin
   ansible.builtin.file:
@@ -60,3 +71,5 @@
     owner: root
     group: root
     state: link
+  tags:
+    - create-dirs
