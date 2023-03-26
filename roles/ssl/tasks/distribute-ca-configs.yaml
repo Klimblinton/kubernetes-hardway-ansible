@@ -9,6 +9,8 @@
     - kubernetes
     - etcd
     - kubernetes-front-proxy
+  tags:
+    - distribute-ssl-configs
 
 - name: Copy ca-config.json
   ansible.builtin.copy:
@@ -17,6 +19,8 @@
     owner: root
     group: root
     mode: 0644
+  tags:
+    - distribute-ssl-configs
 
 - name: Template json config
   ansible.builtin.template:
@@ -40,6 +44,8 @@
     - kube-scheduler
     - kubernetes-admin
     - kube-proxy
+  tags:
+    - distribute-ssl-configs
 
 - name: Template worker node json config
   ansible.builtin.template:
@@ -51,3 +57,5 @@
   with_items: 
     - "{{ groups['worker_hosts'] }}"
     - "{{ groups['master_hosts'] }}"
+  tags:
+    - distribute-ssl-configs

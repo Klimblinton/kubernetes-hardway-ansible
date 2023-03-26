@@ -8,6 +8,9 @@
   with_items: 
     - "{{ groups['worker_hosts'] }}"
     - "{{ groups['master_hosts'] }}"
+  tags:
+    - rename-pems
+    - generate-node-pems
 
 - name: Copy node key pems
   ansible.builtin.copy:
@@ -19,6 +22,9 @@
   with_items: 
     - "{{ groups['worker_hosts'] }}"
     - "{{ groups['master_hosts'] }}"
+  tags:
+    - rename-pems
+    - generate-node-pems
 
 - name: Copy node pems csr
   ansible.builtin.copy:
@@ -30,6 +36,9 @@
   with_items: 
     - "{{ groups['worker_hosts'] }}"
     - "{{ groups['master_hosts'] }}"
+  tags:
+    - rename-pems
+    - generate-node-pems
 
 - name: Delete old node pems
   ansible.builtin.file:
@@ -39,3 +48,6 @@
     - "{{ groups['worker_hosts'] }}"
     - "{{ groups['master_hosts'] }}"
   when: ssl_cleanup_after_generation 
+  tags:
+    - rename-pems
+    - generate-node-pems

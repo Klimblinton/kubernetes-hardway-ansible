@@ -66,6 +66,8 @@
       dst: kube-proxy.crt
     - src: kube-proxy-key.pem
       dst: kube-proxy.key
+  tags:
+    - rename-pems
 
 - name: Copy pems csr
   ansible.builtin.copy:
@@ -89,6 +91,8 @@
     - kube-scheduler.csr
     - kubernetes-admin.csr
     - kube-proxy.csr
+  tags:
+    - rename-pems
 
 - name: Delete old pems
   ansible.builtin.file:
@@ -140,4 +144,6 @@
     - kube-proxy-key.pem
     - kube-proxy.csr
   when: ssl_cleanup_after_generation 
+  tags:
+    - rename-pems
 

@@ -5,6 +5,10 @@
     group: root
     mode: 0750
     state: directory
+  tags:
+  - create-ssl-dirs
+  - create-kube-dirs
+  - create-dirs
 
 - name: Create csr dir
   ansible.builtin.file:

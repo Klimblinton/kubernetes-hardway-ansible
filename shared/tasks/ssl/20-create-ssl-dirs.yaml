@@ -6,7 +6,7 @@
     owner: root
     group: root
   tags:
-  - create-etc-dir
+  - create-etc-dirs
   - create-kube-dirs
 
 - name: Create kubernetes etc ssl directory
@@ -17,7 +17,7 @@
     owner: root
     group: root
   tags:
-  - create-ssl-dir
+  - create-ssl-dirs
   - create-kube-dirs
 
 - name: Create pki symlink to kubernetes ssl directory
@@ -29,7 +29,7 @@
     group: root
     state: link
   tags:
-  - create-ssl-dir
+  - create-ssl-dirs
   - create-kube-dirs
 
 - name: Create etcd etc ssl directory
@@ -40,5 +40,5 @@
     owner: root
     group: root
   tags:
-  - create-ssl-dir
+  - create-ssl-dirs
   - create-kube-dirs
