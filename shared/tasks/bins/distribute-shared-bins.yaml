@@ -35,7 +35,7 @@
   tags:
   - distribute-shared-bins
   - distribute-bins
-  - disribute-container-bin
+  - disribute-containerd-bins
   
 - name: Link containerd binary  
   ansible.builtin.file:
@@ -48,7 +48,7 @@
   tags:
   - distribute-shared-bins
   - distribute-bins
-  - disribute-container-bin
+  - disribute-containerd-bins
 
 - name: Distribute containerd-shim binary
   ansible.builtin.copy:
@@ -60,7 +60,7 @@
   tags:
   - distribute-shared-bins
   - distribute-bins
-  - disribute-container-bin
+  - disribute-containerd-bins
   
 - name: Link containerd-shim binary  
   ansible.builtin.file:
@@ -73,7 +73,7 @@
   tags:
   - distribute-shared-bins
   - distribute-bins
-  - disribute-container-bin
+  - disribute-containerd-bins
 
 - name: Distribute containerd-shim-runc-v1 binary
   ansible.builtin.copy:
@@ -85,7 +85,7 @@
   tags:
   - distribute-shared-bins
   - distribute-bins
-  - disribute-container-bin
+  - disribute-containerd-bins
   
 - name: Link containerd-shim-runc-v1 binary  
   ansible.builtin.file:
@@ -98,7 +98,7 @@
   tags:
   - distribute-shared-bins
   - distribute-bins
-  - disribute-container-bin
+  - disribute-containerd-bins
 
 - name: Distribute containerd-shim-runc-v2 binary
   ansible.builtin.copy:
@@ -110,7 +110,7 @@
   tags:
   - distribute-shared-bins
   - distribute-bins
-  - disribute-container-bin
+  - disribute-containerd-bins
   
 - name: Link containerd-shim-runc-v2 binary  
   ansible.builtin.file:
@@ -123,7 +123,7 @@
   tags:
   - distribute-shared-bins
   - distribute-bins
-  - disribute-container-bin
+  - disribute-containerd-bins
 
 - name: Distribute containerd-stress binary
   ansible.builtin.copy:
@@ -135,7 +135,7 @@
   tags:
   - distribute-shared-bins
   - distribute-bins
-  - disribute-container-bin
+  - disribute-containerd-bins
   
 - name: Link containerd-stress binary  
   ansible.builtin.file:
@@ -148,7 +148,7 @@
   tags:
   - distribute-shared-bins
   - distribute-bins
-  - disribute-container-bin
+  - disribute-containerd-bins
 
 - name: Distribute ctr binary
   ansible.builtin.copy:
@@ -160,7 +160,7 @@
   tags:
   - distribute-shared-bins
   - distribute-bins
-  - disribute-container-bin
+  - disribute-containerd-bins
   
 - name: Link ctrs binary  
   ansible.builtin.file:
@@ -173,7 +173,7 @@
   tags:
   - distribute-shared-bins
   - distribute-bins
-  - disribute-container-bin
+  - disribute-containerd-bins
 
 ## crictl
 - name: Distribute crictl binary
@@ -186,7 +186,7 @@
   tags:
   - distribute-shared-bins
   - distribute-bins
-  - disribute-crictl-bin
+  - disribute-crictl-bins
 
 - name: Link crictl binary  
   ansible.builtin.file:
@@ -199,4 +199,4 @@
   tags:
   - distribute-shared-bins
   - distribute-bins
-  - disribute-crictl-bin
+  - disribute-crictl-bins
