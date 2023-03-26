@@ -54,7 +54,7 @@
       profile: client
     - path: kube-apiserver-etcd-client
       profile: client
-   tags:
+  tags:
     - generate-pems
     - generate-etcd-pems
 
@@ -65,7 +65,7 @@
   with_items:
     - path: front-proxy-client
       profile: client
-   tags:
+  tags:
     - generate-pems
     - generate-front-proxy-pems
 
