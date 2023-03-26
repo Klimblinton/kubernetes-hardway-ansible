@@ -8,7 +8,7 @@ https://github.com/kelseyhightower/kubernetes-the-hard-way/blob/master/docs/06-d
 4. Add etcd server addresses
 5. Add public ip (api gateway addr)
 6. Add CIDR's (pod CIDR and cluster CIDR)
-7. ==Add tags to all tasks==
+7. Add all tags description
 8. Add Etcd replicas howto
 9. Add ssl generation howto
 10. ~~Works on Ubuntu 22.04, should add E7 Support (etcd > 3.2 and kube-apiserver Segfault) (solved - tested on rhel7)~~
