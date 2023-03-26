@@ -5,4 +5,7 @@
     group: root
     mode: '0750'
     state: directory
+  tags:
+    - configure-master
+    - install-master-services
 

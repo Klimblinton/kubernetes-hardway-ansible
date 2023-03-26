@@ -7,12 +7,18 @@
     mode: 0644
   notify:
    - Restart kube-scheduler
+  tags:
+    - install-master-services
+    - install-kube-scheduler-service
 
 - name: Enable and start kube-scheduler service
   ansible.builtin.service:
     name: kube-scheduler
     state: started
     enabled: true 
+  tags:
+    - install-master-services
+    - install-kube-scheduler-service
 
 - name: Check kube-scheduler status
   ansible.builtin.command:
@@ -21,7 +27,13 @@
       - status 
       - kube-scheduler
   register: kube_scheduler_check
+  tags:
+    - install-master-services
+    - install-kube-scheduler-service
 
 - name: Dump kube-scheduler status
   ansible.builtin.debug:
     var: kube_scheduler_check.stdout_lines
+  tags:
+    - install-master-services
+    - install-kube-scheduler-service

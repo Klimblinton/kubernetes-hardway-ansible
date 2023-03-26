@@ -7,12 +7,18 @@
     mode: 0644
   notify:
    - Restart kube-controller-manager
+  tags:
+    - install-master-services
+    - install-kube-controller-manager-service
 
 - name: Enable and start kube-controller-manager service
   ansible.builtin.service:
     name: kube-controller-manager
     state: started
     enabled: true 
+  tags:
+    - install-master-services
+    - install-kube-controller-manager-service
 
 - name: Check kube-controller-manager status
   ansible.builtin.command:
@@ -21,7 +27,13 @@
       - status 
       - kube-controller-manager
   register: kube_controller_manager_check
+  tags:
+    - install-master-services
+    - install-kube-controller-manager-service
 
 - name: Dump kube-controller-manager status
   ansible.builtin.debug:
     var: kube_controller_manager_check.stdout_lines
+  tags:
+    - install-master-services
+    - install-kube-controller-manager-service

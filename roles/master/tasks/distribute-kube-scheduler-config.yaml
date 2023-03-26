@@ -7,3 +7,8 @@
     mode: 0640
   notify:
    - Restart kube-scheduler
+  tags:
+    - configure-master
+    - install-master-services
+    - install-kube-scheluler
+    - configure-kube-scheduler

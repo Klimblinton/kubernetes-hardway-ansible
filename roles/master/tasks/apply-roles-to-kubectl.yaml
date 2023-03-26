@@ -6,7 +6,9 @@
     group: root
     mode: 0755
   tags:
-  - apply-kube-apiserver-clusterrole
+    - apply-kube-apiserver-clusterrole
+    - apply-clusterroles
+    - apply-manifests
 
 - name: Copy kube-apiserver-to-kubelet clusterrole
   ansible.builtin.copy:
@@ -16,7 +18,9 @@
     group: root
     mode: 0755
   tags:
-  - apply-kube-apiserver-clusterrole
+    - apply-kube-apiserver-clusterrole
+    - apply-clusterroles
+    - apply-manifests
   
 - name: Apply kube-apiserver clusterrole
   ansible.builtin.command: 
@@ -27,6 +31,10 @@
       - "{{ kube_etc_base_path }}/admin.conf"
       - -f 
       - /tmp/system-kube-apiserver-clusterrole.yaml
+  tags:
+    - apply-kube-apiserver-clusterrole
+    - apply-clusterroles
+    - apply-manifests
 
 - name: Apply kube-apiserver-to-kubelet clusterrole
   ansible.builtin.command: 
@@ -37,13 +45,25 @@
       - "{{ kube_etc_base_path }}/admin.conf"
       - -f 
       - /tmp/system-kube-apiserver-to-kubelet-clusterrole.yaml
+  tags:
+    - apply-kube-apiserver-to-kubelet-clusterrole
+    - apply-clusterroles
+    - apply-manifests
 
 - name: Delete kube-apiserver clusterrole file (cleanup)
   ansible.builtin.file:
     path: /tmp/system-kube-apiserver-clusterrole.yaml
     state: absent
+  tags:
+    - apply-kube-apiserver-to-kubelet-clusterrole
+    - apply-clusterroles
+    - apply-manifests
 
 - name: Delete kube-apiserver-to-kubelet clusterrole file (cleanup)
   ansible.builtin.file:
     path: /tmp/system-kube-apiserver-to-kubelet-clusterrole.yaml
     state: absent
+  tags:
+    - apply-kube-apiserver-to-kubelet-clusterrole
+    - apply-clusterroles
+    - apply-manifests

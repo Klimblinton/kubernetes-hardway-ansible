@@ -9,6 +9,11 @@
       - --embed-certs=true
       - --server=https://127.0.0.1:6443
       - "--kubeconfig={{ kube_etc_base_path }}/controller-manager.conf"
+  tags:
+    - configure-master
+    - install-master-services
+    - make-controller-manager-conf
+
 
 
 - name: Generate cred for kube-controller-manager from kubectl
@@ -22,7 +27,10 @@
       - --client-key={{ kube_ssl_base_path }}/kube-controller-manager.key 
       - --embed-certs=true
       - "--kubeconfig={{ kube_etc_base_path }}/controller-manager.conf"
-
+  tags:
+    - configure-master
+    - install-master-services
+    - make-controller-manager-conf
 
 - name: Link user cred with kube-controller-manager from kubectl
   ansible.builtin.command:
@@ -34,7 +42,10 @@
       - "--cluster={{ kube_name }}"
       - --user=system:kube-controller-manager
       - "--kubeconfig={{ kube_etc_base_path }}/controller-manager.conf"
-
+  tags:
+    - configure-master
+    - install-master-services
+    - make-controller-manager-conf
 
 - name: Set linked context user cred with kube-controller-manager from kubectl
   ansible.builtin.command:
@@ -44,4 +55,7 @@
       - use-context 
       - default 
       - "--kubeconfig={{ kube_etc_base_path }}/controller-manager.conf"
-
+  tags:
+    - configure-master
+    - install-master-services
+    - make-controller-manager-conf

@@ -8,3 +8,6 @@
   notify:
    - Restart kube-apiserver
    - Restart kube-scheduler
+  tags:
+    - configure-master
+    - install-master-services

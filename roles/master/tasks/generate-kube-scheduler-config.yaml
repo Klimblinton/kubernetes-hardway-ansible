@@ -9,6 +9,10 @@
       - --embed-certs=true
       - --server=https://127.0.0.1:6443
       - "--kubeconfig={{ kube_etc_base_path }}/scheduler.conf"
+  tags:
+    - configure-master
+    - install-master-services
+    - make-scheduler-conf
 
 
 - name: Generate cred for kube-scheduler from kubectl
@@ -22,7 +26,10 @@
       - --client-key={{ kube_ssl_base_path }}/kube-scheduler.key
       - --embed-certs=true
       - "--kubeconfig={{ kube_etc_base_path }}/scheduler.conf"
- 
+  tags:
+    - configure-master
+    - install-master-services
+    - make-scheduler-conf
 
 - name: Link user cred with kube-scheduler from kubectl
   ansible.builtin.command:
@@ -34,6 +41,10 @@
       - "--cluster={{ kube_name }}"
       - --user=system:kube-scheduler
       - "--kubeconfig={{ kube_etc_base_path }}/scheduler.conf"
+  tags:
+    - configure-master
+    - install-master-services
+    - make-scheduler-conf
 
 
 - name: Set linked context user cred with kube-scheduler from kubectl
@@ -44,4 +55,8 @@
       - use-context 
       - default 
       - "--kubeconfig={{ kube_etc_base_path }}/scheduler.conf"
+  tags:
+    - configure-master
+    - install-master-services
+    - make-scheduler-conf
 

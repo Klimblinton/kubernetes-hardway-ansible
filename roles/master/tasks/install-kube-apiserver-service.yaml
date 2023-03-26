@@ -7,12 +7,18 @@
     mode: "0755"
   notify:
    - Restart kube-apiserver
+  tags:
+    - install-master-services
+    - install-kube-apiserver-service
 
 - name: Enable and start kube-apiserver service
   ansible.builtin.service:
     name: kube-apiserver
     state: started
     enabled: true 
+  tags:
+    - install-master-services
+    - install-kube-apiserver-service
 
 - name: Check kube-apiserver status
   ansible.builtin.command:
@@ -21,7 +27,13 @@
       - status 
       - kube-apiserver
   register: kube_apiserver_check
+  tags:
+    - install-master-services
+    - install-kube-apiserver-service
 
 - name: Dump and debug kube-apiserver status
   ansible.builtin.debug:
     var: kube_apiserver_check.stdout_lines
+  tags:
+    - install-master-services
+    - install-kube-apiserver-service

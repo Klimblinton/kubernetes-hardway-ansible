@@ -9,8 +9,13 @@
   retries: 5
   delay: 5
   until: "'is running at' in controlplane_res.stdout" 
-  
+  tags:
+    - install-master-services
+    - wait-controlplane
 
 - name: Dump controlplain status
   ansible.builtin.debug:
     var: controlplane_res.stdout_lines
+  tags:
+    - install-master-services
+    - wait-controlplane

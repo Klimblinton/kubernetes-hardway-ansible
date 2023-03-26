@@ -9,6 +9,10 @@
       - --embed-certs=true
       - --server=https://127.0.0.1:6443
       - "--kubeconfig={{ kube_etc_base_path }}/admin.conf"
+  tags:
+    - configure-master
+    - install-master-services
+    - make-admin-conf
 
 
 - name: Generate cred for admin from kubectl
@@ -22,6 +26,10 @@
       - --client-key={{ kube_ssl_base_path}}/kubernetes-admin.key
       - --embed-certs=true
       - "--kubeconfig={{ kube_etc_base_path }}/admin.conf"
+  tags:
+    - configure-master
+    - install-master-services
+    - make-admin-conf
 
 
 - name: Link user cred with admin from kubectl
@@ -34,6 +42,10 @@
       - "--cluster={{ kube_name }}"
       - --user=kubernetes-admin
       - "--kubeconfig={{ kube_etc_base_path }}/admin.conf"
+  tags:
+    - configure-master
+    - install-master-services
+    - make-admin-conf
 
 
 - name: Set linked context user cred with admin from kubectl
@@ -44,4 +56,8 @@
       - use-context 
       - default 
       - "--kubeconfig={{ kube_etc_base_path }}/admin.conf"
+  tags:
+    - configure-master
+    - install-master-services
+    - make-admin-conf
    

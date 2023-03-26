@@ -24,5 +24,6 @@
    - Restart kube-apiserver
   tags:
     - distribute-certs
-    - distribute-apiserver-cert
+    - distribute-apiserver-certs
+    - distribute-master-certs
     
