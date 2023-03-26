@@ -7,7 +7,7 @@
     mode: 0755 
   tags:
   - distribute-bins
-  - disribute-etcd-bin
+  - disribute-etcd-bins
 
 - name: Link etcd binary  
   ansible.builtin.file:
@@ -19,7 +19,7 @@
     state: link
   tags:
   - distribute-bins
-  - disribute-etcd-bin
+  - disribute-etcd-bins
 
 - name: Distribute etcdctl binary
   ansible.builtin.copy:
@@ -30,7 +30,7 @@
     mode: 0755 
   tags:
   - distribute-bins
-  - disribute-etcd-bin
+  - disribute-etcd-bins
 
 - name: Link etcdctl binary  
   ansible.builtin.file:
@@ -42,4 +42,4 @@
     state: link
   tags:
   - distribute-bins
-  - disribute-etcd-bin
+  - disribute-etcd-bins

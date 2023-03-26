@@ -5,6 +5,9 @@
     group: root
     mode: 0755
     state: directory
+  tags:
+    - make-etcd-dirs
+
 
 - name: Create /var/lib/etcd directroy
   ansible.builtin.file:
@@ -13,6 +16,8 @@
     group: root
     mode: 0700
     state: directory
+  tags:
+    - make-etcd-dirs
 
 - name: Create /etc/kubernetes/pki/etcd directroy
   ansible.builtin.file:
@@ -22,3 +27,5 @@
     mode: 0755
     state: directory
     recurse: yes
+  tags:
+    - make-etcd-dirs
