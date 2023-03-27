@@ -6,9 +6,8 @@
     mode: 0750
     state: directory
   tags:
-  - create-ssl-dirs
-  - create-kube-dirs
-  - create-dirs
+    - create-ssl-dirs
+    - create-dirs
 
 - name: Create csr dir
   ansible.builtin.file:
@@ -17,6 +16,9 @@
     group: root
     mode: 0750
     state: directory
+  tags:
+    - create-ssl-dirs
+    - create-dirs
 
 - name: Create kube certs dirs
   ansible.builtin.file:
@@ -26,3 +28,6 @@
     mode: 0750
     state: directory
     recurse: yes
+  tags:
+    - create-ssl-dirs
+    - create-dirs
